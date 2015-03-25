@@ -1,0 +1,55 @@
+#datatbl tr.dataheadline {
+	font-weight: bold;
+
+}
+#datatbl tr.dataline:nth-child(even) {
+    background-color: lightgray;
+}
+
+#datatbl tr.dataline:nth-child(odd) {
+    background-color: white;
+}
+
+#datatbl td {
+    padding: 0px 20px 0px 5px;
+    margin: 0;
+    cell-spacing 0;
+}
+
+#datatbl {
+    border-collapse: collapse;
+    border-spacing 0;
+}
+
+#datatbl a:link, #datatbl a:visited {
+    display: block;
+    font-style: italic;
+    text-allign: center;
+    text-decoration: none;
+    color:black;
+    padding: 3px;
+}
+
+#datatbl a:hover {
+    background-color: #e00000;
+
+}
+
+#datatbl a:active {
+    background-color: #b00000;
+}
+
+
+textarea {
+    resize:none;
+}
+
+#infoerr {
+    color: red;
+    font-weight: bold;
+}
+
+#infosucc{
+    color: green;
+}
+

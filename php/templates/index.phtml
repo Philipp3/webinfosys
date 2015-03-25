@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen"  href="style.css">
+    <title><?=$title?></title>
+  </head>
+  <body>
+    <div id="main">	
+      <div id="menuholder">
+	<ul class="menu_list">
+	  <?php foreach($menuentries as $curr => $currname) { ?>
+	  <li class="<?php if(basename($curr,'.php') == basename(__FILE__,'.phtml')) echo('current '); ?>menuitem"><a href="<?=$curr?>"><?=$currname?></a></li>
+	  <?php } ?>
+	</ul>
+      </div>
+      <div id="contentholder">
+	<h1><?=$title?></h1>
+	Dies ist eine Beispielseite zur Demonstration der Grundlagen von HTML, CSS und responsive Web Design. Der Inhalt der Seite sollte sowohl auf Desktop-Monitoren als auch auf Mobilgeräten in einem lesbaren Format angezeigt werden. Unter dem Menüpunkt <a href="img.php">Beispielseite</a> kann man überprüfen, wie Browser auf unterschiedlichen Endgeräten die Position des Menüs anpassen.
+      </div>
+      <div id="sidebar">
+	<h2>Sidebar</h2>
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis gravida venenatis sem nec auctor. Morbi gravida mi et arcu tempor consequat. Vivamus scelerisque tortor et massa placerat, sed porttitor turpis feugiat. Nullam massa arcu, rutrum in mi sit amet, viverra tempor massa. Nulla volutpat porta velit. Ut eget arcu id nibh cursus congue. Vestibulum id augue et eros faucibus interdum vel vel est. Duis gravida ultricies nisl in dictum. Etiam posuere tellus a rhoncus accumsan. Suspendisse a purus convallis, aliquet nisl quis, euismod erat.
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen"  href="style.css">
+    <title><?=$title?></title>
+  </head>
+  <body>
+    <div id="main">
+    <div id="menuholder">
+      <ul class="menu_list">
+	  <?php foreach($menuentries as $curr => $currname) { ?>
+	  <li class="<?php if(basename($curr,'.php') == basename(__FILE__,'.phtml')) echo('current '); ?>menuitem"><a href="<?=$curr?>"><?=$currname?></a></li>
+	  <?php } ?>
+      </ul>
+    </div>
+    <div id="contentholder">
+      <h1><?=$title?></h1>
+      Mitglieder:
+      <ul>
+	<li>Maislinger Andreas</li>
+	<li>Peringer Philipp</li>
+      </ul>
+    </div>
+    </div>
+  </body>
+</html>

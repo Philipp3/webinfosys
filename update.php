@@ -1,5 +1,6 @@
 <?php
-  echo(htmlentities(trim(shell_exec("git pull"))));
+  header("Content-type: text/plain");
+  echo(trim(shell_exec("git pull")));
   echo("\n\nStatus:\n");
-  echo(htmlentities(trim(shell_exec("git status"))));
+  echo(trim(shell_exec("git status")));
 ?>

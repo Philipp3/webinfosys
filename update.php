@@ -1,5 +1,5 @@
 <?php
-  echo(shell_exec("git pull"));
+  echo(htmlentities(trim(shell_exec("git pull"))));
   echo("\n\nStatus:\n");
-  echo(shell_exec("git status"));
+  echo(htmlentities(trim(shell_exec("git status"))));
 ?>

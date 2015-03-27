@@ -1,5 +1,8 @@
 <?php
 namespace grp12\template;
+
+include("../Logger.php");
+
 class Template {
     private $vals = array();
     private $template_file = "";
@@ -8,6 +11,10 @@ class Template {
         return($this -> vals[$name]);
     }
     public function __set($name, $value) {
+        if($name == "this") {
+            logger\Logger.getLogger().error('"this" may not be used as name for a template variable.');
+            return $value;
+        }
         $this -> vals[$name] = $value;
         return $value;
     }

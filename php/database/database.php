@@ -1,9 +1,11 @@
 <?php
 namespace grp12\database;
 
+include_once("../Logger.php");
+
 include_once("dblogininfo.php");
 class Database {
-
+    
     private $db = null;
     private $connected = false;
 
@@ -15,7 +17,7 @@ class Database {
                 dbint\dbpwd);
             $this -> connected = true;
         } catch(PDOException $ex) {
-            echo("Error: ".$ex->getMessage());
+            logger\Logger.getLogger().error("Problem establishing database connection: ".$ex->getMessage());
         }
         return($this -> db);
     }

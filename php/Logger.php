@@ -25,7 +25,7 @@ class Logger {
     
     const LOGFILENAME = "/home/user/server.log";
     
-    private $logLevel = self::LEVEL_NONE;
+    private $logLevel = self::LEVEL_INFO;
     private $outputToSite = false;
     private $messages = array();
 

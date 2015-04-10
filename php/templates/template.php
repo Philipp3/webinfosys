@@ -12,7 +12,7 @@ class Template {
     }
     public function __set($name, $value) {
         if($name == "this") {
-            logger\Logger.getLogger().error('"this" may not be used as name for a template variable.');
+            logger\Logger::getLogger().error('"this" may not be used as name for a template variable.');
             return $value;
         }
         $this -> vals[$name] = $value;

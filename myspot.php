@@ -5,7 +5,7 @@ include("php/templates/template.php");
 include("php/menu.php");
 include("php/database/database.php");
 
-$db = database\Database.getInstance() -> connect();
+$db = database\Database::getInstance() -> connect();
 $template = new template\Template("php/templates/myspot.phtml");
 
 $template -> fatalerror = false;

@@ -15,12 +15,7 @@ class userMgr {
     		$instance = new userMgr();
     	return($instance);
 	}
-    private function construct() {}
-    
-    private $loggedin = false;
-    private $username = null;
-    
-    public function init() {
+    private function construct() {
     	$session = session\Session.getInstance();
     	$session -> start();
     	if(isset($session->username)) {
@@ -28,6 +23,10 @@ class userMgr {
     		$username = $session->username;
     	}
     }
+    
+    private $loggedin = false;
+    private $username = null;
+    private $session = null;
     
     public function login($username, $password) {
     	$db = database\Database.getInstance() -> connect();
@@ -40,14 +39,21 @@ class userMgr {
     		$phrase = $password . $userdata["salt"];
     		if(hash("sha256", $phrase) == $userdata["hash"]) {
     			$session->username = $userdata["username"];
+    			$loggedin = true;
+    			$username = $userdata["username"];
     			return $this -> EXIT_SUCCESS;
     		} else {
     			return $this -> ERROR_WRONG_PASSWORD;
     		}
     	} else
     		return $this -> ERROR_NONEXISTING_USER;
-    	}
-    	 
     }
+    
+    public function logout() {
+    	$loggedin = false;
+    	$username = null;
+    	unset($session->username);
+    }
+    
 }
 ?>

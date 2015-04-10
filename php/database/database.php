@@ -5,7 +5,14 @@ include_once("../Logger.php");
 
 include_once("dblogininfo.php");
 class Database {
-    
+	private static $instance = null;
+	public static function getInstance() {
+		if($instance == null)
+			$instance = new Database();
+		return $instance;
+	}
+    private function __construct() { }
+	
     private $db = null;
     private $connected = false;
 

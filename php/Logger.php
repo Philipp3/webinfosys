@@ -89,8 +89,8 @@ class LogMsg {
     private $msg;
 
     function __construct(int $level, $msg) {
-        this->level = $level;
-        this->msg = $msg;
+        $this->level = $level;
+        $this->msg = $msg;
     }
     
     public function __get($name) {

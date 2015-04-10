@@ -5,10 +5,10 @@ include_once("/var/www/html/php/Logger.php");
 
 include_once("dblogininfo.php");
 class Database {
-	private static $instance = null;
+	private static $instance;
 	public static function getInstance() {
-		if($instance == null)
-			$instance = new Database();
+		if(!isset(self::$instance))
+			self::$instance = new self();
 		return $instance;
 	}
     private function __construct() { }

@@ -3,12 +3,12 @@ namespace grp12\logger;
 
 class Logger {
     //Only one Logger instance allowed
-    private static $instance = null;
-    public static function getLogger() {
-        if($instance == null)
-            $instance = new Logger();
-        return $instance;
-    }
+	private static $instance;
+	public static function getLogger() {
+		if(!isset(self::$instance))
+			self::$instance = new self();
+		return $instance;
+	}
     private function __construct() { }
     
     const LEVEL_NONE = 0;

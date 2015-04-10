@@ -1,7 +1,5 @@
-body{
-	font: 100%/1.4 "HelveticaNeue","Helvetica","Arial",sans-serif
-
-
+body {
+	font: 100%/1.4 "HelveticaNeue", "Helvetica", "Arial", sans-serif
 }
 
 /*
@@ -9,10 +7,8 @@ body{
 	float:left;
 }
 */
-
 #menuholder ul {
-    padding: 0;
-
+	padding: 0;
 }
 
 .menu_list a:link, .menu_list  a:visited {
@@ -23,24 +19,22 @@ body{
 	text-align: center;
 	padding: 4px;
 	text-decoration: none;
-
 }
+
 .menu_list .current a:link {
 	text-decoration: underline;
 }
 
 .menu_list a:hover {
-    background-color: #e00000;
+	background-color: #e00000;
 }
 
 .menu_list a:active {
-    background-color: #b00000;
+	background-color: #b00000;
 }
 
-
 #contentholder {
-
-	clear:both;
+	clear: both;
 }
 
 @media screen and (min-width: 40em) {
@@ -53,7 +47,6 @@ body{
 		float: left;
 		width: 25%;
 	}
-
 	#sidebar {
 		clear: both;
 	}
@@ -62,36 +55,29 @@ body{
 	}
 }
 
-
 @media screen and (min-width: 60em) {
-
 	#menuholder {
 		width: 25%;
-		float:left;
+		float: left;
 	}
-
 	#contentholder {
-		float:left;
+		float: left;
 		clear: none;
 		width: 55%;
 	}
-	
 	#sidebar {
-		float:right;
+		float: right;
 		clear: none;
 		width: 20%;
-	
 	}
 	#main {
 		max-width: 70em;
-
 	}
 }
 
-
 .menuitem {
-    list-style-type: none;
-    margin: 0px;
-    padding: 1em;
-    float: inherit;
+	list-style-type: none;
+	margin: 0px;
+	padding: 1em;
+	float: inherit;
 }

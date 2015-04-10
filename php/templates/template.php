@@ -1,7 +1,7 @@
 <?php
 namespace grp12\template;
 
-include("php/Logger.php");
+include("/var/www/html/php/Logger.php");
 
 class Template {
     private $vals = array();

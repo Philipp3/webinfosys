@@ -1,7 +1,7 @@
 <?php
 namespace grp12\database;
 
-include_once("../Logger.php");
+include_once("/var/www/html/php/Logger.php");
 
 include_once("dblogininfo.php");
 class Database {

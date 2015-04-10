@@ -31,7 +31,7 @@ class userMgr {
     public function login($username, $password) {
     	$db = database\Database.getInstance() -> connect();
     	if($db == null)
-    		return $this -> ERROR_ESTABLISHING_DB_CONNECTION;
+    		return self::ERROR_ESTABLISHING_DB_CONNECTION;
     	$stmt = $db -> prepare("SELECT * FROM users WHERE username=?");
     	$stmt -> execute(array($username));
     	if($stmt -> rowCount() > 0) {
@@ -41,12 +41,12 @@ class userMgr {
     			$session->username = $userdata["username"];
     			$loggedin = true;
     			$username = $userdata["username"];
-    			return $this -> EXIT_SUCCESS;
+    			return self::EXIT_SUCCESS;
     		} else {
-    			return $this -> ERROR_WRONG_PASSWORD;
+    			return self::ERROR_WRONG_PASSWORD;
     		}
     	} else
-    		return $this -> ERROR_NONEXISTING_USER;
+    		return self::ERROR_NONEXISTING_USER;
     }
     
     public function logout() {

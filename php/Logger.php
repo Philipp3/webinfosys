@@ -15,8 +15,7 @@ class Logger {
     const LEVEL_ERR  = 1;
     const LEVEL_WARN = 2;
     const LEVEL_INFO = 3;
-    const LEVEL_DEBUG= 4;
-    const LEVELNAMES = array(
+    private $LEVELNAMES = array(
         LEVEL_ERR => "ERROR",
         LEVEL_WARN => "WARNING",
         LEVEL_INFO => "INFO",
@@ -66,12 +65,12 @@ class Logger {
     private function makeLogEntry($logMsg) {
         array_push(messages,$logMsg);
         if($this->outputToSite) {
-            $message = "[" . self::LEVELNAMES[$logMsg->level] . $logMsg->msg."\n";
+            $message = "[" . $LEVELNAMES[$logMsg->level] . $logMsg->msg."\n";
             echo($message);
         }
         if($this->logLevel >= $logMsg->level) {
             //print log message to file
-            $message = "[" . self::LEVELNAMES[$logMsg->level] . date("[y-m-d H:i:s] ") . $logMsg->msg."\n";
+            $message = "[" . $LEVELNAMES[$logMsg->level] . date("[y-m-d H:i:s] ") . $logMsg->msg."\n";
             $logfile = fopen(self::LOGFILENAME, "a");
             if($logfile != null) {
                 fwrite($logfile, $message);

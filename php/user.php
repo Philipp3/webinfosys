@@ -14,7 +14,7 @@ class userMgr {
 	public static function getInstance() {
 		if(!isset(self::$instance))
 			self::$instance = new self();
-		return $instance;
+		return self::$instance;
 	}
     private function construct() {
     	$session = session\Session.getInstance();

@@ -1,7 +1,7 @@
 <?php
 namespace grp12\user;
 
-incluce_once("session.php");
+incluce("session.php");
 
 class userMgr {
 	const EXIT_SUCCESS = 0;

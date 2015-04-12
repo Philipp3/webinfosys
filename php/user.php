@@ -30,7 +30,7 @@ class userMgr {
     private $session = null;
     
     public function login($username, $password) {
-    	$db = database\Database::getInstance() -> connect();
+    	$db = \grp12\database\Database::getInstance() -> connect();
     	if($db == null)
     		return self::ERROR_ESTABLISHING_DB_CONNECTION;
     	$stmt = $db -> prepare("SELECT * FROM users WHERE username=?");

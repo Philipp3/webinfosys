@@ -33,6 +33,8 @@ class userMgr {
     }
     
     public function login($username, $password) {
+    	$this -> session = session\Session::getInstance();
+    	$this -> session -> start();
     	$db = \grp12\database\Database::getInstance() -> connect();
     	if($db == null)
     		return self::ERROR_ESTABLISHING_DB_CONNECTION;
@@ -42,7 +44,7 @@ class userMgr {
     		$userdata = $stmt -> fetch();
     		$phrase = $password . $userdata["salt"];
     		if(hash("sha256", $phrase) == $userdata["hash"]) {
-			echo($session);
+			echo($this -> session);
     			$this -> session -> __set("username",$username);
     			$this -> loggedin = true;
     			$this -> username = $username;

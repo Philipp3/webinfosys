@@ -7,6 +7,8 @@ include("php/user.php");
 
 $template = new template\Template("php/templates/login.phtml");
 
+echo(user\userMgr::getInstance());
+
 $infomsg = "";
 if(isset($_POST["username"]) && isset($_POST["password"])) {
 	$username = $_POST["username"];

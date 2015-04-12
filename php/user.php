@@ -17,8 +17,8 @@ class userMgr {
 		return self::$instance;
 	}
     private function construct() {
-    	$session = session\Session::getInstance();
-    	$session -> start();
+    	$this -> session = session\Session::getInstance();
+    	$this -> session -> start();
     	if(isset($session->username)) {
     		$this -> loggedin = true;
     		$this -> username = $session->username;
@@ -40,7 +40,7 @@ class userMgr {
     		$phrase = $password . $userdata["salt"];
     		if(hash("sha256", $phrase) == $userdata["hash"]) {
 			echo($session);
-    			$session->username = $username;
+    			$this -> session->username = $username;
     			$this -> loggedin = true;
     			$this -> username = $username;
     			return self::EXIT_SUCCESS;

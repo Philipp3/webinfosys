@@ -1,19 +1,80 @@
 <?php
 namespace grp12;
 
-include("php/templates/template.php");
-include("php/menu.php");
-include("php/database/database.php");
+use grp12\user\userMgr;
+require_once "php/templates/template.php";
+require_once "php/menu.php";
+require_once "php/database/database.php";
+require_once "php/user.php";
 
 $db = database\Database::getInstance() -> connect();
-$template = new template\Template("php/templates/myspot.phtml");
+$template = null;
 
-$template -> fatalerror = false;
+$usermgr = UserMgr::getInstance();
+
+$infomsg = "";
 
 if($db == null) {
     $template -> fatalerror = true;
     $template -> fatalerrormsg = "Fehler: Verbindung zur Datenbank gescheitert.";
 }
+
+if(!isset($_GET["spotname"])) {
+	if($_GET["action"] == "edit") {
+	} else {
+		$template = new template\Template("php/templates/myspot_main.phtml");
+		if(!isset($_GET["search"])) {
+			$template -> title = "Myspots Startseite";
+			$data = $db -> query("SELECT * FROM myspots");
+			$template -> groupcount = ceil(count($data)/10); 
+			$start = 0;
+			if(isset($_GET["start"]))
+				$start = $_GET["start"];
+			$template -> data = array_slice($data,10*($start-1), 10); 
+			if($_GET["action"] == "delete") {
+				$delete = $_GET["delete"];
+				$stmt = $db -> prepare("SELECT * FROM  myspots WHERE name=?");
+				$stmt -> execute(array($delete));
+				if($stmt -> rowCount() > 0) {
+					$stmt = $db -> prepare("DELETE FROM myspots WHERE name=?");
+					$stmt -> execute(array($delete));
+					$infomsg = "#Spot $delete gelöscht.";
+				} else
+					$infomsg = "!Löschen gescheitert - Spot $delete nicht gefunden.";
+			}
+		} else {
+			$template -> title = "Suchergebnisse für ".$_GET["search"];
+			$stmt = $db -> prepare("SELECT * FROM  myspots WHERE name LIKE ?");
+			$template -> groupcount = 1;
+			$stmt -> execute(array($_GET["search"]));
+			$template -> data = $stmt -> fetchAll();
+		}
+		$template->infomsg = $infomsg;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 $infomsg = "";
 if(isset($_GET["delete"])) {
@@ -70,5 +131,5 @@ if($infomsg != "") {
 } else $template -> infomsg = "";
 
 $template -> out();
-
+*/
 ?>

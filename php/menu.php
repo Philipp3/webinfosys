@@ -3,5 +3,6 @@ $menuentries = array(
     "index.php" => "Startseite",
     "team.php" => "Über das Team",
     "img.php" => "Beispielseite",
-    "myspot.php" => "MySpot");
+    "myspot.php" => "MySpot",
+    "login.php" => "Login");
 ?>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen"  href="/style.css">
+    <title><?=$title?></title>
+  </head>
+  <body>
+    <div id="main">	
+      <div id="menuholder">
+	<ul class="menu_list">
+	  <?php foreach($menuentries as $curr => $currname) { ?>
+	  <li class="<?php if(basename($curr,'.php') == basename(__FILE__,'.phtml')) echo('current '); ?>menuitem"><a href="<?=$curr?>"><?=$currname?></a></li>
+	  <?php } ?>
+	</ul>
+      </div>
+      <div id="contentholder">
+	
+	  <form method="post">
+	    <table>
+	      <tr>
+		<td><label for="username">Username</label></td>
+		<td><input type="text" name="username" id="username"/></td>
+	      </tr>
+	      <tr>
+		<td><label for="password">Passwort</label></td>
+		<td><input type="password" name="password" id="password"/></td>
+	      </tr>
+	      <tr><td><button type="submit">Login</button></td></tr>
+	    </table>
+	  </form>
+
+	  <?php if($infomsg != "") { ?>
+	  <div id = <?=$infotype?>><?=$infomsg?></div><br />
+	  <?php } ?>
+
+      </div>
+    </div>
+  </body>
+</html>

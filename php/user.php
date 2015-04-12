@@ -17,7 +17,7 @@ class userMgr {
 		return self::$instance;
 	}
     private function construct() {
-    	$session = session\Session.getInstance();
+    	$session = session\Session::getInstance();
     	$session -> start();
     	if(isset($session->username)) {
     		$loggedin = true;

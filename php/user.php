@@ -20,8 +20,8 @@ class userMgr {
     	$session = session\Session::getInstance();
     	$session -> start();
     	if(isset($session->username)) {
-    		$loggedin = true;
-    		$username = $session->username;
+    		$this -> loggedin = true;
+    		$this -> username = $session->username;
     	}
     }
     
@@ -39,9 +39,9 @@ class userMgr {
     		$userdata = $stmt -> fetch();
     		$phrase = $password . $userdata["salt"];
     		if(hash("sha256", $phrase) == $userdata["hash"]) {
-    			$session->username = $userdata["username"];
-    			$loggedin = true;
-    			$username = $userdata["username"];
+    			$session->username = $username;
+    			$this -> loggedin = true;
+    			$this -> username = $username;
     			return self::EXIT_SUCCESS;
     		} else {
     			return self::ERROR_WRONG_PASSWORD;
@@ -51,8 +51,8 @@ class userMgr {
     }
     
     public function logout() {
-    	$loggedin = false;
-    	$username = null;
+    	$this -> loggedin = false;
+    	$this -> username = null;
     	unset($session->username);
     }
     

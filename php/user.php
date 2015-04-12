@@ -16,6 +16,13 @@ class userMgr {
 			self::$instance = new self();
 		return self::$instance;
 	}
+	
+	
+    
+    private $loggedin = false;
+    private $username = null;
+    private $session = null;
+	
     private function construct() {
     	$this -> session = session\Session::getInstance();
     	$this -> session -> start();
@@ -24,10 +31,6 @@ class userMgr {
     		$this -> username = $session->username;
     	}
     }
-    
-    private $loggedin = false;
-    private $username = null;
-    private $session = null;
     
     public function login($username, $password) {
     	$db = \grp12\database\Database::getInstance() -> connect();
@@ -39,7 +42,7 @@ class userMgr {
     		$userdata = $stmt -> fetch();
     		$phrase = $password . $userdata["salt"];
     		if(hash("sha256", $phrase) == $userdata["hash"]) {
-			echo($session);
+			//echo($session);
     			$this -> session->username = $username;
     			$this -> loggedin = true;
     			$this -> username = $username;
@@ -54,7 +57,7 @@ class userMgr {
     public function logout() {
     	$this -> loggedin = false;
     	$this -> username = null;
-    	unset($session->username);
+    	unset($this -> session->username);
     }
     
 }

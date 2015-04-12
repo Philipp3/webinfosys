@@ -12,7 +12,7 @@ if(isset($_POST["username"]) && isset($_POST["password"])) {
 	$username = $_POST["username"];
 	$password = $_POST["password"];
 
-	$ret = user\userMgr::login($username, $password);
+	$ret = user\userMgr::getInstance().login($username, $password);
 
 	if ($ret==user\userMgr::EXIT_SUCCESS){
 		$infomsg = "#Login erfolgreich.";

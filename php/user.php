@@ -2,6 +2,7 @@
 namespace grp12\user;
 
 include_once("/var/www/html/php/session.php");
+include_once("/var/www/html/php/database/database.php");
 
 class userMgr {
 	const EXIT_SUCCESS = 0;
@@ -29,7 +30,7 @@ class userMgr {
     private $session = null;
     
     public function login($username, $password) {
-    	$db = database\Database.getInstance() -> connect();
+    	$db = database\Database::getInstance() -> connect();
     	if($db == null)
     		return self::ERROR_ESTABLISHING_DB_CONNECTION;
     	$stmt = $db -> prepare("SELECT * FROM users WHERE username=?");

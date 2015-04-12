@@ -43,7 +43,7 @@ class userMgr {
     		$phrase = $password . $userdata["salt"];
     		if(hash("sha256", $phrase) == $userdata["hash"]) {
 			//echo($this -> session);
-    			$this -> session -> __set("username",$username);
+    			$this -> session -> username = $username;
     			$this -> loggedin = true;
     			$this -> username = $username;
     			return self::EXIT_SUCCESS;

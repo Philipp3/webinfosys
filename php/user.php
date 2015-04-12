@@ -10,7 +10,6 @@ class userMgr {
 	const ERROR_ESTABLISHING_DB_CONNECTION = 3;
 	
     private static $instance = null;
-	private static $instance;
 	public static function getInstance() {
 		if(!isset(self::$instance))
 			self::$instance = new self();

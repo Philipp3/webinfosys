@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen"  href="/style.css">
+    <link rel="stylesheet" type="text/css" media="screen"  href="/stylems.css">
+    <title><?=$title?></title>
+  </head>
+    <body>
+    <div id="main">
+      
+      <div id="menuholder">
+	<ul class="menu_list">
+	  <?php foreach($menuentries as $curr => $currname) { ?>
+	  <li class="<?php if(basename($curr,'.php') == basename(__FILE__,'.phtml')) echo('current '); ?>menuitem"><a href="<?=$curr?>"><?=$currname?></a></li>
+	  <?php } ?>
+	</ul>
+      </div>
+	<div id="contentholder">
+	  <h1><?=$title?></h1>
+
+	  <form method="get">
+	    <table>
+	      <tr>
+		<td><label for="name">Name</label></td>
+		<td><input type="text" name="name" id="name"/></td>
+	      </tr>
+	      <tr>
+		<td><label for="loc">Ort</label></td>
+		<td><input type="text" name="loc" id="loc"/></td>
+	      </tr>
+	      <tr>
+		<td><label for="desc">Text</label></td>
+		<td><textarea rows="10" cols="30" name="desc" id="desc"></textarea></td>
+	      </tr>
+	      <tr><td></td><td><button type="submit">Speichern</button></td></tr>
+	    </table>
+	  </form>
+	  <?php } ?>
+	</div>
+    </div>
+  </body>
+</html>

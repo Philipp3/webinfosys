@@ -66,7 +66,11 @@
 	  <?php } ?>
 	</div>
 	<div id="paginator">
-
+		<ul class="paginator">
+			  <?php for($i = 1; $i <= $groupcount; $i = $i+1){ ?>
+			  <li class="<?php if($i == $currentpage) echo('current '); ?>paginatoritem"><a href="myspot.php?start=<?=$i ?>"><?=$i ?></a></li>
+			  <?php } ?>
+		</ul>
 	</div>
     </div>
   </body>

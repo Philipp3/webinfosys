@@ -26,10 +26,11 @@ if(!isset($_GET["spotname"])) {
 		if(!isset($_GET["search"])) {
 			$template -> title = "Myspots Startseite";
 			$data = $db -> query("SELECT * FROM myspots");
-			$template -> groupcount = ceil(count($data)/10); 
+			$template -> groupcount = ceil(count($data)/10);
 			$start = 0;
 			if(isset($_GET["start"]))
 				$start = $_GET["start"];
+			$template -> currentpage = $start;
 			$template -> data = array_slice($data,10*($start-1), 10); 
 			if($_GET["action"] == "delete") {
 				$delete = $_GET["delete"];
@@ -46,6 +47,7 @@ if(!isset($_GET["spotname"])) {
 			$template -> title = "Suchergebnisse für ".$_GET["search"];
 			$stmt = $db -> prepare("SELECT * FROM  myspots WHERE name LIKE ?");
 			$template -> groupcount = 1;
+			$template -> currentpage = 1;
 			$stmt -> execute(array($_GET["search"]));
 			$template -> data = $stmt -> fetchAll();
 		}

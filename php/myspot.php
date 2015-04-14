@@ -19,11 +19,8 @@ function prepMyspotTemplate() {
 	} else {
 		//Simple spot list without any other seettings
 		$pagNumber = 1;
-		if(isset($_GET["page"]))
+		if(isset($_GET["page"])&&is_int(0+$_GET["page"]))
 			$pagNumber = $_GET["page"];
-		if(!is_int($pagNumber)) {
-			$pagNumber = 1;
-		}
 		$template = new template\Template(SERVERPATH . "php/templates/myspot_list.phtml");
 		$template->title = "Spotliste";
 		$query = $db->query("SELECT COUNT(*) FROM myspots");

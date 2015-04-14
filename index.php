@@ -64,7 +64,7 @@ switch ($site) {
 			}
 		} else {
 			
-			if ($usermgr->loggedin ()) {
+			if ($usermgr->loggedin) {
 				$sidetemplate->loggedin = true;
 				if ($_GET ["action"] == "logout") {
 					$usermgr->logout ();

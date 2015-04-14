@@ -1,0 +1,30 @@
+	  <h1><?=$title?></h1>
+	  <?php if(count($data) > 0) { ?>
+	  <table id='datatbl'>
+	    <tr class='dataheadline'>
+	      <td class='dataheadcell'>Name</td>
+	      <td class='dataheadcell'>Ort</td>
+	      <td class='dataheadcell'>Beschreibung</td>
+	      <td><td></td>
+	    </tr>
+	    <?php foreach($data as $item=>$attribs) { ?>
+	    <tr class='dataline'>
+              <td class='datacell'><?=$attribs["name"]?></td>
+              <td class='datacell'><?=$attribs["location"]?></td>
+              <td class='datacell'><?=$attribs["description"]?></td>
+              <td class='datacell'><a href='#' onclick='document.getElementById("name").setAttribute("value","<?=$attribs["name"]?>");document.getElementById("loc").setAttribute("value","<?=$attribs["location"]?>");document.getElementById("desc").value="<?=$attribs["description"]?>";'>Ändern</a></td>
+              <td class='datacell'><a href='myspot.php?delete=<?=$attribs["name"]?>'>Löschen</a></td></tr>
+	    <?php } ?>
+	  </table><br><br>
+	  Angezeigt werden Spots <?=$spotNrStart?> bis <?=$spotNrEnd?> von <?=$spotCount?><br />
+	  <?php } else { ?>
+	  Keine Spots gefunden.
+	  <?php } ?>
+	  
+	  <?php if(isset($showPaginator)) {?>
+	<div id="paginator">
+	<?php for($i = 0; $i < $pagPages;++$i) {?>
+	<a href = "?page=<?=$i?>"><?=$i?></a> 
+	<?php }?>
+	</div>
+	<?php }?>

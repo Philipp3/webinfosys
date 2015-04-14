@@ -24,7 +24,7 @@ class userMgr {
     private $session = null;
 	
     private function construct() {
-    	$this -> session = \grp12\session\Session::getInstance();
+    	$this -> session = \grp12\session\Session::gestInstance();
     	$this -> session -> start();
     	if(isset($session->username)) {
     		$this -> loggedin = true;

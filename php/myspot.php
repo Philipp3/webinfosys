@@ -25,11 +25,11 @@ function prepMyspotTemplate($maintemplate) {
 		$template->title = "Spotliste";
 		$query = $db->query("SELECT COUNT(*) FROM spotlist");
 		$spotcount = $query[0];
-		if(($page-1)*10 >= spotcount) {
+		if(($pagNumber-1)*10 >= $spotcount) {
 			$template->pageTooHigh = true;
-			$pagNumber = max(1,ceil(spotcount/10));
+			$pagNumber = max(1,ceil($spotcount/10));
 		}
-		$query = $db->query("SELECT name FROM myspots LIMIT ".(pagNumber-1)*10, 10);
+		$query = $db->query("SELECT name FROM myspots LIMIT ".($pagNumber-1)*10, 10);
 		if($spotcount > 10)
 			$template->showPaginator = true;
 		$template->spotCount = $spotcount;

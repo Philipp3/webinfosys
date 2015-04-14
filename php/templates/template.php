@@ -29,7 +29,7 @@ class Template {
     
     public function outString() {
     	ob_start();
-    	out();
+    	$this->out();
     	return ob_get_clean();
     }
 }

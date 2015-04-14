@@ -6,6 +6,7 @@ const SERVERPATH = "/var/www/html/";
 
 require_once SERVERPATH . "php/templates/template.php";
 require_once SERVERPATH . "php/user.php";
+require_once SERVERPATH . "php/myspot.php";
 
 $maintemplate = new template\Template ( SERVERPATH . "php/templates/base.phtml" );
 

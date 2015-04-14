@@ -29,7 +29,7 @@ function prepMyspotTemplate($maintemplate) {
 			$template->pageTooHigh = true;
 			$pagNumber = max(1,ceil($spotcount/10));
 		}
-		$query = $db->query("SELECT name FROM myspots LIMIT ".($pagNumber-1)*10, 10);
+		$query = $db->query("SELECT name FROM myspots LIMIT ".($pagNumber-1)*10.", 10");
 		if($spotcount > 10)
 			$template->showPaginator = true;
 		$template->spotCount = $spotcount;

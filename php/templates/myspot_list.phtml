@@ -2,18 +2,12 @@
 	  <?php if(count($data) > 0) { ?>
 	  <table id='datatbl'>
 	    <tr class='dataheadline'>
-	      <td class='dataheadcell'>Name</td>
-	      <td class='dataheadcell'>Ort</td>
-	      <td class='dataheadcell'>Beschreibung</td>
+	      <td class='dataheadcell'>Spotname</td>
 	      <td><td></td>
 	    </tr>
-	    <?php foreach($data as $item=>$attribs) { ?>
+	    <?php foreach($spotdata as $attribs) { ?>
 	    <tr class='dataline'>
-              <td class='datacell'><?=$attribs["name"]?></td>
-              <td class='datacell'><?=$attribs["location"]?></td>
-              <td class='datacell'><?=$attribs["description"]?></td>
-              <td class='datacell'><a href='#' onclick='document.getElementById("name").setAttribute("value","<?=$attribs["name"]?>");document.getElementById("loc").setAttribute("value","<?=$attribs["location"]?>");document.getElementById("desc").value="<?=$attribs["description"]?>";'>Ändern</a></td>
-              <td class='datacell'><a href='myspot.php?delete=<?=$attribs["name"]?>'>Löschen</a></td></tr>
+              <td class='datacell'><?=$attribs["name"]?></td></tr>
 	    <?php } ?>
 	  </table><br><br>
 	  Angezeigt werden Spots <?=$spotNrStart?> bis <?=$spotNrEnd?> von <?=$spotCount?><br />

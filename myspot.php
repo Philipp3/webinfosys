@@ -4,10 +4,10 @@ namespace grp12;
 
 //use grp12\user\userMgr;
 
-require_once "php/templates/template.php";
-require_once "php/menu.php";
-require_once "php/database/database.php";
-require_once "php/user.php";
+require_once "/var/www/html/php/templates/template.php";
+require_once "/var/www/html/php/menu.php";
+require_once "/var/www/html/php/database/database.php";
+require_once "/var/www/html/php/user.php";
 
 $db = database\Database::getInstance ()->connect ();
 $template = null;

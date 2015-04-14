@@ -2,7 +2,7 @@
 
 require_once "/var/www/html/php/user.php";
 
-$usermgr = userMgr::getInstance();
+$usermgr = \grp12\user\userMgr::getInstance();
 
 $menuentries = array(
     "index.php" => "Startseite",

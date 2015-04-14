@@ -22,14 +22,23 @@ switch ($site) {
 		$maintemplate->pagetitle = "Startseite";
 		$sidetemplate = new template\Template ( SERVERPATH . "php/templates/index.phtml" );
 		break;
+		
+		
+		
 	case "img" :
 		$maintemplate->pagetitle = "Beispielseite für Fließtext";
 		$sidetemplate = new template\Template ( SERVERPATH . "php/templates/img.phtml" );
 		break;
+		
+		
+		
 	case "team" :
 		$maintemplate->pagetitle = "Über das Team";
 		$sidetemplate = new template\Template ( SERVERPATH . "php/templates/team.phtml" );
 		break;
+		
+		
+		
 	case "login" :
 		$sidetemplate = new template\Template ( SERVERPATH . "php/templates/login.phtml" );
 		$referer = "";
@@ -53,6 +62,7 @@ switch ($site) {
 					case user\userMgr::ERROR_WRONG_PASSWORD :
 						$maintemplate->pagetitle = "Fehler";
 						$sidetemplate->loggedin = false;
+						$sidetemplate->defaultUsername = $username;
 						$sidetemplate->errmsg = "errUserPwd";
 						break;
 					case user\userMgr::ERROR_ESTABLISHING_DB_CONNECTION :
@@ -68,22 +78,25 @@ switch ($site) {
 				$sidetemplate->loggedin = true;
 				if (isset($_GET["action"]) && $_GET ["action"] == "logout") {
 					$usermgr->logout ();
+					$sidetemplate->loggedin = false;
 					$maintemplate->pagetitle = "Abmeldung erfolgreich";
 					$sidetemplate->infomsg = "infLoggedOut";
 				} else {
 					$sidetemplate->pagetitle = "Angemeldet";
-					$sidetemplate->infomsg = "infLoggedIn";
+					$sidetemplate->infomsg = "infLoggedInAlready";
 				}
 			} else {
 				$maintemplate->pagetitle = "Anmelden";
 				$sidetemplate->loggedin = false;
 				if (isset($_GET["action"]) && $_GET ["action"] == "logout") {
-					$sidetemplate->infotype = "infoerr";
-					$sidetemplate->infomsg = "Sie sind bereits abgemeldet.";
+					$sidetemplate->errmsg = "ErrLoggedOutAlready";
 				}
 			}
 		}
 		break;
+		
+		
+		
 	default :
 		$maintemplate->pagetitle = "Seite nicht gefunden";
 		$sidetemplate = new template\Template ( SERVERPATH . "php/templates/404.phtml" );

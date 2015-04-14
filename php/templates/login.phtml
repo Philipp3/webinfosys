@@ -3,7 +3,7 @@
 	    <table>
 	      <tr>
 		<td><label for="username">Username</label></td>
-		<td><input type="text" name="username" id="username"/></td>
+		<td><input type="text" name="username" id="username" value="<?php if(isset($defaultUsername)) echo($defaultUsername);?>/></td>
 	      </tr>
 	      <tr>
 		<td><label for="password">Passwort</label></td>
@@ -33,6 +33,8 @@ Sie sind bereits abgemeldet.
 Anmeldung erfolgreich.
 <?php } else if($infomsg == "infLoggedOut") {?>
 Sie sind jetzt abgemeldet.
+<?php } else if($infomsg == "infLoggedInAlready") {?>
+Sie sind bereits angemeldet. Um auf einen anderen Benutzer zu wechseln, bitte melden Sie sich mit dem Link links im Menü ab.
 <?php } ?>
 </div>
 <?php } ?>

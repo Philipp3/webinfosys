@@ -1,9 +1,10 @@
 <?php
 namespace grp12;
+
+const SERVERPATH = "/var/www/html/";
+
 require_once SERVERPATH."php/templates/template.php";
 require_once SERVERPATH."php/user.php";
- 
-const SERVERPATH = "/var/www/html/";
 
 $maintemplate = new template\Template(SERVERPATH."php/templates/base.phtml");
 

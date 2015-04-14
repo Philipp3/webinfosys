@@ -42,7 +42,6 @@ class userMgr {
     		$userdata = $stmt -> fetch();
     		$phrase = $password . $userdata["salt"];
     		if(hash("sha256", $phrase) == $userdata["hash"]) {
-			echo("Sessionname: ".$this -> session);
     			$this -> session -> username = $username;
     			$this -> loggedin = true;
     			$this -> username = $username;

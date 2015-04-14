@@ -35,7 +35,7 @@ function prepMyspotTemplate() {
 		$template->spotCount = $spotcount;
 		$template->currPagVal = $pagNumber;
 		$template->spotNrStart = $pagNumber*10-9;
-		$template->spotNrEnd = min($pagNumber*10, $spotcount+10-$pagNumber*10);
+		$template->spotNrEnd = min($pagNumber*10, $spotcount);
 		$template->spotdata = $query->fetchAll();
 		$template->pagPages = ceil($spotcount/10);
 	}

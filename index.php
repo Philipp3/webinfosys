@@ -97,6 +97,13 @@ switch ($site) {
 		
 		
 		
+	case "myspot":
+		$maintemplate->title = "Myspots";
+		$sidetemplate = prepMyspotTemplate();
+		break;
+		
+		
+		
 	default :
 		$maintemplate->pagetitle = "Seite nicht gefunden";
 		$sidetemplate = new template\Template ( SERVERPATH . "php/templates/404.phtml" );

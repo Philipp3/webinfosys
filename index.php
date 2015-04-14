@@ -12,10 +12,10 @@ $usermgr = user\userMgr::getInstance();
 
 
 $menuentries = array(
-		"/index.php" => "Startseite",
-		"/team.php" => "Über das Team",
-		"/img.php" => "Beispielseite",
-		"/myspot.php" => "MySpot");
+		"/" => "Startseite",
+		"/team/" => "Über das Team",
+		"/img/" => "Beispielseite",
+		"/myspot/" => "MySpot");
 if($usermgr->loggedin)
 	$menuentries["/login.php?action=logout"] = $usermgr->username." abmelden";
 else

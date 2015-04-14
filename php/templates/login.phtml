@@ -1,23 +1,5 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen"  href="/style.css">
-    <title><?=$title?></title>
-  </head>
-  <body>
-    <div id="main">	
-      <div id="menuholder">
-	<ul class="menu_list">
-	  <?php foreach($menuentries as $curr => $currname) { ?>
-	  <li class="<?php if(basename($curr,'.php') == basename(__FILE__,'.phtml')) echo('current '); ?>menuitem"><a href="<?=$curr?>"><?=$currname?></a></li>
-	  <?php } ?>
-	</ul>
-      </div>
-      <div id="contentholder">
-	
-	  <form method="post">
+<?php if(!$loggedin) { ?>
+<form method="post">
 	    <table>
 	      <tr>
 		<td><label for="username">Username</label></td>
@@ -25,17 +7,34 @@
 	      </tr>
 	      <tr>
 		<td><label for="password">Passwort</label></td>
-		<td><input type="password" name="password" id="password"/></td>
+		<td><input type="password" name="password" id="password"/><input type="hidden" name="ref" id="ref" value = <?=$referer?></td>
 	      </tr>
 	      <tr><td><button type="submit">Login</button></td></tr>
 	    </table>
 	  </form>
+<?php } ?>
+<?php if(isset($errmsg)) { ?>
+<div id = "infoerr">
+<?php if($errmsg == "errUserPwd") {?>
+Anmeldung gescheitert. Bitte überprüfen Sie die Schreibweise von Benutzernamen und Passwort.
+<?php } else if($errmsg == "errDbCon") {?>
+Es trat ein Fehler bei der Datenbankverbindung auf. Bitte versuchen Sie es später noch einmal.
+<?php } else if($errmsg == "errLoggedInAlready") {?>
+Sie sind bereits angemeldet. Bitte melden Sie zuerst mit dem Link links im Menü ab.
+<?php } else if($errmsg == "errLoggedOutAlready") {?>
+Sie sind bereits abgemeldet.
+<?php } ?>
+</div>
+<?php } ?>
 
-	  <?php if($infomsg != "") { ?>
-	  <div id = <?=$infotype?>><?=$infomsg?></div><br />
-	  <?php } ?>
-
-      </div>
-    </div>
-  </body>
-</html>
+<?php if(isset($infomsg)) { ?>
+<div id = "infosucc">
+<?php if($infomsg == "infLoggedIn") {?>
+Anmeldung erfolgreich.
+<?php } else if($infomsg == "infLoggedOut") {?>
+Sie sind jetzt abgemeldet.
+<?php } ?>
+</div>
+<?php } ?>
+<br><br>
+<a href="<?=$referer?>">Zurück zur vorherigen Seite</a>

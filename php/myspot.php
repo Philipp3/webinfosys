@@ -5,6 +5,7 @@ namespace grp12;
 require_once SERVERPATH . "php/templates/template.php";
 require_once SERVERPATH . "php/database/database.php";
 require_once SERVERPATH . "php/user.php";
+require_once SERVERPATH . "php/myspot.php";
 
 function prepMyspotTemplate() {
 	$db = database\Database::getInstance ()->connect ();

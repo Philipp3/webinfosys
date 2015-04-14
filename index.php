@@ -52,6 +52,7 @@ switch($site) {
 		break;
 }
 
-
+echo($maintemplate);
 $maintemplate -> out();
+
 ?>

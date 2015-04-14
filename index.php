@@ -33,22 +33,22 @@ switch($site) {
 	case "index":
 		$maintemplate->pagetitle = "Startseite";
 		$sidetemplate = new template\Template(SERVERPATH."php/templates/index.phtml");
-		$maintemplate = $sidetemplate->outString();
+		$maintemplate->content =  $sidetemplate->outString();
 		break;
 	case "img":
 		$maintemplate->pagetitle = "Beispielseite für Fließtext";
 		$sidetemplate = new template\Template(SERVERPATH."php/templates/img.phtml");
-		$maintemplate = $sidetemplate->outString();
+		$maintemplate->content = $sidetemplate->outString();
 		break;
 	case "team":
 		$maintemplate->pagetitle = "Über das Team";
 		$sidetemplate = new template\Template(SERVERPATH."php/templates/team.phtml");
-		$maintemplate = $sidetemplate->outString();
+		$maintemplate->content = $sidetemplate->outString();
 		break;
 	default:
 		$maintemplate->pagetitle = "Seite nicht gefunden";
 		$sidetemplate = new template\Template(SERVERPATH."php/templates/404.phtml");
-		$maintemplate = $sidetemplate->outString();
+		$maintemplate->content = $sidetemplate->outString();
 		break;
 }
 

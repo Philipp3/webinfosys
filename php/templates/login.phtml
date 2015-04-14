@@ -39,4 +39,6 @@ Sie sind bereits angemeldet. Um auf einen anderen Benutzer zu wechseln, bitte me
 </div>
 <?php } ?>
 <br><br>
+<?php if(isset($referer) && $referer != "") {?>
 <a href="<?=$referer?>">Zurück zur vorherigen Seite</a>
+<?php }?>

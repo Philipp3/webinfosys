@@ -54,6 +54,17 @@ class userMgr {
     		return self::ERROR_NONEXISTING_USER;
     }
     
+    public function __get($name) {
+    	switch($name) {
+    		case "loggedin":
+    			return $this->loggedin;
+    			break;
+    		case "username":
+    			return $this->username;
+    			break;
+    	}
+    }
+    
     public function logout() {
     	$this -> loggedin = false;
     	$this -> username = null;

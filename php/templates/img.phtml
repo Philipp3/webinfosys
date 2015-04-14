@@ -1,22 +1,4 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen"  href="/style.css">
-    <title><?=$title?></title>
-  </head>
-  <body>
-    <div id="main">
-    <div id="menuholder">
-      <ul class="menu_list">
-	  <?php foreach($menuentries as $curr => $currname) { ?>
-	  <li class="<?php if(basename($curr,'.php') == basename(__FILE__,'.phtml')) echo('current '); ?>menuitem"><a href="<?=$curr?>"><?=$currname?></a></li>
-	  <?php } ?>
-      </ul>
-    </div>
-    <div id="contentholder">
-      <h1><?=$title?></h1>
+<h1>Beispielseite für Fließtext</h1>
       Diese Seite ist mit Fließtext gefüllt.
 <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis gravida venenatis sem nec auctor. Morbi gravida mi et arcu tempor consequat. Vivamus scelerisque tortor et massa placerat, sed porttitor turpis feugiat. Nullam massa arcu, rutrum in mi sit amet, viverra tempor massa. Nulla volutpat porta velit. Ut eget arcu id nibh cursus congue. Vestibulum id augue et eros faucibus interdum vel vel est. Duis gravida ultricies nisl in dictum. Etiam posuere tellus a rhoncus accumsan. Suspendisse a purus convallis, aliquet nisl quis, euismod erat.
@@ -28,7 +10,3 @@ Duis quis pulvinar magna, ac lacinia tortor. In gravida ante in nunc lacinia, qu
 Nam feugiat finibus velit, non pretium leo. Vivamus luctus tempus ante, congue auctor orci consectetur et. Aenean id nisi est. Vivamus eget tincidunt lectus. Ut mi nunc, tristique tempus efficitur non, ullamcorper vel nulla. Etiam placerat elit enim, vitae hendrerit ipsum convallis ut. Morbi ac quam nulla. Proin nec dolor eget neque auctor porta ut ut odio. Phasellus dictum nulla id tortor convallis eleifend. Ut sodales massa non lorem fringilla scelerisque. Duis in purus sapien.
 <p>
 Donec sed bibendum mauris. Nullam tincidunt lacus vel risus venenatis laoreet. Etiam libero magna, bibendum in metus et, rutrum tempus erat. Praesent fringilla elementum consectetur. Cras blandit urna eget velit feugiat aliquet. Vestibulum quis nulla sed dolor lacinia tincidunt ut vitae lorem. Integer quis nibh sed est venenatis feugiat quis vitae metus. Vivamus quis consectetur metus. Sed vehicula ante dui, eget venenatis tellus lacinia sed. 
-    </div>
-    </div>
-  </body>
-</html>

@@ -26,5 +26,11 @@ class Template {
         extract($this -> vals);
         include($this -> template_file);
     }
+    
+    public function outString() {
+    	ob_start();
+    	out();
+    	return ob_get_clean();
+    }
 }
 ?>

@@ -39,7 +39,7 @@ switch ($site) {
 		if (isset ( $_POST ["username"] )) {
 			$username = $_POST ["username"];
 			$password = $_POST ["password"];
-			$referer = $_POST ["referer"];
+			$referer = $_POST ["ref"];
 			$sidetemplate->referer = $referer;
 			if (! $usermgr->loggedin) {
 				$return = $usermgr->login ( $username, $password );
@@ -66,7 +66,7 @@ switch ($site) {
 			
 			if ($usermgr->loggedin) {
 				$sidetemplate->loggedin = true;
-				if ($_GET ["action"] == "logout") {
+				if (isset($_GET["action"]) && $_GET ["action"] == "logout") {
 					$usermgr->logout ();
 					$maintemplate->pagetitle = "Abmeldung erfolgreich";
 					$sidetemplate->infomsg = "infLoggedOut";
@@ -77,7 +77,7 @@ switch ($site) {
 			} else {
 				$maintemplate->pagetitle = "Anmelden";
 				$sidetemplate->loggedin = false;
-				if ($_GET ["action"] == "logout") {
+				if (isset($_GET["action"]) && $_GET ["action"] == "logout") {
 					$sidetemplate->infotype = "infoerr";
 					$sidetemplate->infomsg = "Sie sind bereits abgemeldet.";
 				}

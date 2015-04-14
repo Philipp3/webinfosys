@@ -23,8 +23,8 @@ function prepMyspotTemplate($maintemplate) {
 			$pagNumber = $_GET["page"];
 		$template = new template\Template(SERVERPATH . "php/templates/myspot_list.phtml");
 		$template->title = "Spotliste";
-		$query = $db->query("SELECT COUNT(*) FROM spotlist");
-		$spotcount = $query[0];
+		$query = $db->query("SELECT COUNT(*) FROM myspots");
+		$spotcount = $query->fetch()[0];
 		if(($pagNumber-1)*10 >= $spotcount) {
 			$template->pageTooHigh = true;
 			$pagNumber = max(1,ceil($spotcount/10));

@@ -4,9 +4,9 @@ namespace grp12\session;
 class Session {
 	private static $instance = null;
 	public static function getInstance() {
-		if($instance == null)
-			$instance = new Session();
-		return $instance;
+		if(self::$instance == null)
+			self::$instance = new Session();
+		return self::$instance;
 	}
 	private function __construct() { }
 	

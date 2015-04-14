@@ -2,7 +2,7 @@
 
 namespace grp12;
 
-use grp12\user\userMgr;
+//use grp12\user\userMgr;
 
 require_once "php/templates/template.php";
 require_once "php/menu.php";

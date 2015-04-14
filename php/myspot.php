@@ -19,7 +19,7 @@ function prepMyspotTemplate() {
 	} else {
 		//Simple spot list without any other seettings
 		$pagNumber = 1;
-		if(isset($_GET["page"])&&is_int($_GET["page"]+0))
+		if(isset($_GET["page"])&&is_numeric($_GET["page"]))
 			$pagNumber = $_GET["page"];
 		$template = new template\Template(SERVERPATH . "php/templates/myspot_list.phtml");
 		$template->title = "Spotliste";

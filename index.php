@@ -32,7 +32,9 @@ switch ($site) {
 		break;
 	case "login" :
 		$sidetemplate = new template\Template ( SERVERPATH . "php/templates/login.phtml" );
-		$sidetemplate->referer = $_SERVER ["HTTP_REFERER"];
+		$referer = "";
+		if(isset($_SERVER["HTTP_REFERER"]))
+			$sidetemplate->referer = $_SERVER ["HTTP_REFERER"];
 		
 		if (isset ( $_POST ["username"] )) {
 			$username = $_POST ["username"];
@@ -95,9 +97,9 @@ $menuentries = array (
 		"/myspot/" => "MySpot"
 );
 if ($usermgr->loggedin)
-	$menuentries ["/login.php?action=logout"] = $usermgr->username . " abmelden";
+	$menuentries ["/login/?action=logout"] = $usermgr->username . " abmelden";
 else
-	$menuentries ["/login.php"] = "Anmelden";
+	$menuentries ["/login/"] = "Anmelden";
 
 $maintemplate->menuentries = $menuentries;
 

@@ -14,7 +14,7 @@ class Session {
 	private $session_started = false;
 
 	public function start() {
-		if(!$session_started)
+		if(!$this->session_started)
 			return session_start();
 		return true;
 	}

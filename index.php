@@ -21,6 +21,8 @@ if($usermgr->loggedin)
 else
 	$menuentries["/login.php"] = "Anmelden";
 
+$maintemplate->menuentries = $menuentries;
+
 if($usermgr->loggedin)
 	$maintemplate->sidebarcontent = "Angemeldet als ".$usermgr->username;
 else

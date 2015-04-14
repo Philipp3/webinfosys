@@ -28,7 +28,7 @@ class userMgr {
     	$this -> session -> start();
     	if(isset($this->session->username)) {
     		$this -> loggedin = true;
-    		$this -> username = $session->username;
+    		$this -> username = $this->session->username;
     	}
     }
     

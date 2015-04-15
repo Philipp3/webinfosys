@@ -11,7 +11,7 @@ function prepMyspotTemplate() {
 	$db = \grp12\database\Database::getInstance ()->connect ();
 	$template = null;
 	
-	$usermgr = user\userMgr::getInstance ();
+	$usermgr = \grp12\user\userMgr::getInstance ();
 	
 	if (isset ( $_GET ["searchSpotName"] )) {
 		// TODO display results from a search after a certain spotname

@@ -2,7 +2,7 @@
 
 namespace grp12\myspot;
 
-use const grp12\SERVERPATH;
+
 require_once SERVERPATH . "php/templates/template.php";
 require_once SERVERPATH . "php/database/database.php";
 require_once SERVERPATH . "php/user.php";

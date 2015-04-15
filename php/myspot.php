@@ -50,7 +50,7 @@ function prepMyspotTemplate() {
 					$_GET ["spotname"] 
 			) );
 			if ($stmt->rowCount () > 0) {
-				$template = new template\Template ( SERVERPATH . "php/templates/myspot_detail.phtml" );
+				$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_detail.phtml" );
 				$row = $stmt->fetch ();
 				$template->spotname = $row ["name"];
 				$template->spotloc = $row ["location"];
@@ -75,7 +75,7 @@ function getBasicSpotTemplate() {
 	$pagNumber = 1;
 	if (isset ( $_GET ["page"] ) && is_numeric ( $_GET ["page"] ))
 		$pagNumber = $_GET ["page"];
-	$template = new template\Template ( SERVERPATH . "php/templates/myspot_list.phtml" );
+	$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_list.phtml" );
 	$template->title = "Spotliste";
 	$query = $db->query ( "SELECT COUNT(*) FROM myspots" );
 	$spotcount = $query->fetch ()[0];

@@ -8,7 +8,7 @@ require_once SERVERPATH . "php/templates/template.php";
 require_once SERVERPATH . "php/database/database.php";
 require_once SERVERPATH . "php/user.php";
 function prepMyspotTemplate() {
-	$db = database\Database::getInstance ()->connect ();
+	$db = \grp12\database\Database::getInstance ()->connect ();
 	$template = null;
 	
 	$usermgr = user\userMgr::getInstance ();

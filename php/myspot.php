@@ -66,12 +66,12 @@ function prepMyspotTemplate() {
 		}
 	} else {
 		// Simple spot list without any other seettings
-		$template = getBasicSpotTemplate ();
+		$template = getBasicSpotTemplate ($db);
 	}
 	
 	return $template;
 }
-function getBasicSpotTemplate() {
+function getBasicSpotTemplate($db) {
 	$pagNumber = 1;
 	if (isset ( $_GET ["page"] ) && is_numeric ( $_GET ["page"] ))
 		$pagNumber = $_GET ["page"];

@@ -100,7 +100,7 @@ switch ($site) {
 		
 	case "myspot":
 		$maintemplate->pagetitle = "Myspots";
-		$sidetemplate = prepMyspotTemplate();
+		$sidetemplate = myspot\prepMyspotTemplate();
 		break;
 		
 		

@@ -7,7 +7,7 @@
 	    </tr>
 	    <?php foreach($spotdata as $attribs) { ?>
 	    <tr class='dataline'>
-              <td class='datacell'><?=$attribs["name"]?></td></tr>
+              <td class='datacell'><a href="/myspot/<?=$attribs["name"]?>/"><?=$attribs["name"]?></a></td></tr>
 	    <?php } ?>
 	  </table><br><br>
 	  Angezeigt werden Spots <?=$spotNrStart?> bis <?=$spotNrEnd?> von insgesamt <?=$spotCount?>.<br />
@@ -22,3 +22,6 @@
 	<?php }?>
 	</div>
 	<?php }?>
+<?php if(isset($infomsg)) {?>
+<div id="infomsg"><?=$infomsg?></div>
+<?php } ?>

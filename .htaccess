@@ -1,0 +1,20 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+
+RewriteRule ^.*$ - [NC,L]
+
+#RewriteRule ^index/?$ index.php [NC,L]
+RewriteRule ^img/?$ index.php?site=img [NC,L]
+RewriteRule ^team/?$ index.php?site=team [NC,L]
+RewriteRule ^myspot/?$ index.php?site=myspot [NC,L,QSA]
+RewriteRule ^login/?$ index.php?site=login [NC,L,QSA]
+
+RewriteRule ^myspot/([^/]+)/?$ index.php?site=myspot&spotname=$1 [NC,L,QSA]
+RewriteRule ^myspot/([^/]+)/([^/]+)/?$ index.php?site=myspot&spotname=$1&action=$2 [NC,L,QSA]
+
+RewriteRule ^images/([^/]+)/(.*)$ images/$1.png [L]
+
+#RewriteRule ^.*$ index.php [NC,L]

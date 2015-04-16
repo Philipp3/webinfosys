@@ -3,7 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen"  href="/style.css">
+    <?php if(isset($stylesheets)) {
+    for($i = 0;$i < count($stylesheets);++$i) { ?>
+    <link rel="stylesheet" type="text/css" media="screen"  href="<?=$stylesheets[$i]?>">
+    <?php } }?>
+    <?php if(isset($scripts)) {
+    for($i = 0;$i < count($scripts);++$i) { ?>
+    <script type="text/javascript" src="<?=$scripts[$i]?>"/>
+    <?php } }?>
     <title><?=$pagetitle?></title>
   </head>
   <body>

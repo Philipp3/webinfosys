@@ -10,6 +10,9 @@ require_once SERVERPATH . "php/myspot.php";
 
 $maintemplate = new template\Template ( SERVERPATH . "php/templates/base.phtml" );
 
+$maintemplate->$scripts = array();
+$maintemplate->$stylesheets = array("/style.css");
+
 $usermgr = user\userMgr::getInstance ();
 
 $site = "index";

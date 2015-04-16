@@ -115,7 +115,8 @@ $menuentries = array (
 		"/" => "Startseite",
 		"/team/" => "Über das Team",
 		"/img/" => "Beispielseite",
-		"/myspot/" => "MySpot"
+		"/myspot/" => "MySpot",
+		"/phpmyadmin/" => "phpmyadmin"
 );
 if ($usermgr->loggedin)
 	$menuentries ["/login/?action=logout"] = $usermgr->username . " abmelden";

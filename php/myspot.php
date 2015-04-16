@@ -25,7 +25,7 @@ function prepMyspotTemplate() {
 				$stmt->execute ( array (
 						$_GET ["spotname"] 
 				) );
-				$template = getBasicSpotTemplate ();
+				$template = getBasicSpotTemplate ($db);
 				if ($stmt->rowCount () > 0) {
 					$filename = $stmt->fetch ()["spotimg"];
 					if ($filename != "") {
@@ -60,7 +60,7 @@ function prepMyspotTemplate() {
 				if (isset ( $_POST ["spotNewName"] )) {
 					// TODO implement functionality to add new spot to the database
 				}
-				$template = getBasicSpotTemplate ();
+				$template = getBasicSpotTemplate ($db);
 				$template->infomsg = "Spot " . $_GET ["spotname"] . " existiert nicht.";
 			}
 		}

@@ -3,9 +3,8 @@
 <tr><td>Name</td><td><?=$spotname?></td></tr>
 <tr><td>Ort</td><td><?=$spotloc?></td></tr>
 <tr><td>Beschreibung</td><td><?=$spotdesc?></td></tr>
-<tr><td>Bild</td><td>
 <?php if(isset($images)) { foreach($images as $img){ ?>
-<img alt="Bild von <?=$spotname?>" src="/images/"<?=$img["filename"]./.$img["filename_original"]?>>
+<tr><td colspan="2"><img alt="Bild von <?=$spotname?>" src="/images/"<?=$img["filename"]."/".$img["filename_original"]?>></td></tr>
 <?php }} else { ?>
 Zu diesem Spot wurde kein Bild gespeichert.
 <?php } ?></td></tr>

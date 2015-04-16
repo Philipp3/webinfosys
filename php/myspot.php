@@ -21,6 +21,7 @@ function prepMyspotTemplate() {
 		$spotname = $_GET ["spotname"];
 		if (isset ( $_GET ["action"] )) {
 			if ($_GET ["action"] == "delete") {
+				if($usermgr->loggedin) {
 				$stmt = $db->prepare ( "SELECT * FROM myspots WHERE name=?" );
 				$stmt->execute ( array (
 						$_GET ["spotname"] 
@@ -39,6 +40,9 @@ function prepMyspotTemplate() {
 				} else {
 					$template->infomsg = "Spot " . $_GET ["spotname"] . " existiert nicht.";
 				}
+				} else {
+					//TODO implement error message if user tries deleting without being logged in
+				}
 			} else if ($_GET ["action"] == "edit") {
 				// TODO implement editing function
 			} else if ($_GET ["action"] == "new") {
@@ -56,6 +60,7 @@ function prepMyspotTemplate() {
 				$template->spotloc = $row ["location"];
 				$template->spotdesc = $row ["description"];
 				$template->spotimg = $row ["spotimg"];
+				$template->loggedin = $usermgr->loggedin;
 			} else {
 				if (isset ( $_POST ["spotNewName"] )) {
 					// TODO implement functionality to add new spot to the database

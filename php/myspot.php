@@ -49,18 +49,23 @@ function prepMyspotTemplate() {
 				// TODO implement function for adding new spot
 			}
 		} else {
-			$stmt = $db->prepare ( "SELECT * FROM myspots WHERE name=?" );
-			$stmt->execute ( array (
+			$stmt_s = $db->prepare ( "SELECT * FROM myspots WHERE name=?" );
+			$stmt_s->execute ( array (
 					$_GET ["spotname"] 
 			) );
-			if ($stmt->rowCount () > 0) {
+			if ($stmt_s->rowCount () > 0) {
 				$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_detail.phtml" );
-				$row = $stmt->fetch ();
+				$row = $stmt_s->fetch ();
 				$template->spotname = $row ["name"];
 				$template->spotloc = $row ["location"];
 				$template->spotdesc = $row ["description"];
-				$template->spotimg = $row ["spotimg"];
 				$template->loggedin = $usermgr->loggedin;
+
+				$stmt_i = $db->prepare("SELECT * FROM myspots_images WHERE name=?");
+				$stmt_i->execute (array($_GET["spotname"]));
+				if ($stmt_i->rowCount() > 0){
+					$template->images = $stmt_i->fetchAll();
+				}
 			} else {
 				if (isset ( $_POST ["spotNewName"] )) {
 					// TODO implement functionality to add new spot to the database

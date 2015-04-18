@@ -15,6 +15,6 @@ RewriteRule ^login/?$ index.php?site=login [NC,L,QSA]
 RewriteRule ^myspot/([^/]+)/?$ index.php?site=myspot&spotname=$1 [NC,L,QSA]
 RewriteRule ^myspot/([^/]+)/([^/]+)/?$ index.php?site=myspot&spotname=$1&action=$2 [NC,L,QSA]
 
-RewriteRule ^images/([^/]+)/(.*)$ images/$1.png [L]
+RewriteRule ^images/([^/]+)/.+\.(.+)$ images/$1.$2 [L]
 
 #RewriteRule ^.*$ index.php [NC,L]

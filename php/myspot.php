@@ -13,65 +13,62 @@ function prepMyspotTemplate() {
 	
 	$usermgr = \grp12\user\userMgr::getInstance ();
 	
-	if (isset ( $_GET ["searchSpotName"] )) {
-		// TODO display results from a search after a certain spotname
-		$search = $_GET ["searchSpotName"];
+	if (isset ( $_GET ["search"] )) {
+		$search = $_GET ["search"];
+		$template = getBasicSpotTemplate ($db,$search);
+
 	} else if (isset ( $_GET ["spotname"] )) {
 		// Handle viewing, editing, deleting etc. of chosen spot
-		$spotname = $_GET ["spotname"];
+
+		$spotname = $_GET["spotname"];
+		$stmt = $db->prepare("SELECT * FROM myspots WHERE name=?");
+		$stmt->execute(array($spotname));
+
 		if (isset ( $_GET ["action"] )) {
+			if (! $usermgr->loggedin) {
+				//TODO redirect login
+			}
+
 			if ($_GET ["action"] == "delete") {
-				if($usermgr->loggedin) {
-				$stmt = $db->prepare ( "SELECT * FROM myspots WHERE name=?" );
-				$stmt->execute ( array (
-						$_GET ["spotname"] 
-				) );
 				$template = getBasicSpotTemplate ($db);
+
 				if ($stmt->rowCount () > 0) {
-					$filename = $stmt->fetch ()["spotimg"];
-					if ($filename != "") {
-						delete_file ( SERVERPATH . "images/$filename" );
-					}
-					$stmt = $db->prepare ( "DELETE FROM myspots WHERE name=?" );
-					$stmt->execute ( array (
-							$_GET ["spotname"] 
-					) );
-					$template->infomsg = "Spot " . $_GET ["spotname"] . " wurde gelöscht.";
+
+					//TODO delete image files
+
+					$stmt = $db->prepare("DELETE FROM myspots, myspots_images WHERE name=?");
+					$stmt->execute(array($spotname));
+
+					$template->infomsg = "Spot " . $spotname . " wurde gelöscht.";
 				} else {
-					$template->infomsg = "Spot " . $_GET ["spotname"] . " existiert nicht.";
+					$template->infomsg = "Spot " . $spotname . " existiert nicht.";
 				}
-				} else {
-					//TODO implement error message if user tries deleting without being logged in
-				}
+
 			} else if ($_GET ["action"] == "edit") {
-				// TODO implement editing function
+				//$template = 
 			} else if ($_GET ["action"] == "new") {
 				// TODO implement function for adding new spot
 			}
-		} else {
-			$stmt_s = $db->prepare ( "SELECT * FROM myspots WHERE name=?" );
-			$stmt_s->execute ( array (
-					$_GET ["spotname"] 
-			) );
-			if ($stmt_s->rowCount () > 0) {
+
+		} else { //display details & images
+
+			if ($stmt->rowCount() > 0) {
 				$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_detail.phtml" );
-				$row = $stmt_s->fetch ();
+				$row = $stmt->fetch();
 				$template->spotname = $row ["name"];
 				$template->spotloc = $row ["location"];
 				$template->spotdesc = $row ["description"];
 				$template->loggedin = $usermgr->loggedin;
 
 				$stmt_i = $db->prepare("SELECT * FROM myspots_images WHERE name=?");
-				$stmt_i->execute (array($_GET["spotname"]));
+				$stmt_i->execute (array($spotname));
 				if ($stmt_i->rowCount() > 0){
 					$template->images = $stmt_i->fetchAll();
 				}
+
 			} else {
-				if (isset ( $_POST ["spotNewName"] )) {
-					// TODO implement functionality to add new spot to the database
-				}
 				$template = getBasicSpotTemplate ($db);
-				$template->infomsg = "Spot " . $_GET ["spotname"] . " existiert nicht.";
+				$template->infomsg = "Spot " . $spotname . " existiert nicht.";
 			}
 		}
 	} else {
@@ -81,26 +78,44 @@ function prepMyspotTemplate() {
 	
 	return $template;
 }
-function getBasicSpotTemplate($db) {
+function getBasicSpotTemplate($db, $search=null) {
 	$pagNumber = 1;
 	if (isset ( $_GET ["page"] ) && is_numeric ( $_GET ["page"] ))
 		$pagNumber = $_GET ["page"];
 	$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_list.phtml" );
-	$template->title = "Spotliste";
-	$query = $db->query ( "SELECT COUNT(*) FROM myspots" );
-	$spotcount = $query->fetch ()[0];
+
+	if ($search != null){
+		$template->title = "Suchergebnisse";
+		$stmt = $db->prepare ( "SELECT COUNT(*) FROM myspots WHERE name LIKE %?%" );
+		$stmt->execute(array($search));
+
+	} else {
+		$template->title = "Spotliste";
+		$stmt = $db->prepare ( "SELECT COUNT(*) FROM myspots" );
+		$stmt->execute();
+	}
+
+	$spotcount = $stmt->fetch()[0];
 	if (($pagNumber - 1) * 10 >= $spotcount) {
 		$template->pageTooHigh = true;
 		$pagNumber = max ( 1, ceil ( $spotcount / 10 ) );
 	}
-	$query = $db->query ( "SELECT name FROM myspots LIMIT " . (($pagNumber - 1) * 10) . ", 10" );
+	
+	if ($search != null){
+		$stmt = $db->prepare ( "SELECT name FROM myspots WHERE name LIKE %?% LIMIT " . (($pagNumber - 1) * 10) . ", 10" );
+		$stmt->execute(array($search));
+	} else {
+		$stmt = $db->prepare ( "SELECT name FROM myspots LIMIT " . (($pagNumber - 1) * 10) . ", 10" );
+		$stmt->execute();
+	}
+
 	if ($spotcount > 10)
 		$template->showPaginator = true;
 	$template->spotCount = $spotcount;
 	$template->currPagVal = $pagNumber;
 	$template->spotNrStart = $pagNumber * 10 - 9;
 	$template->spotNrEnd = min ( $pagNumber * 10, $spotcount );
-	$template->spotdata = $query->fetchAll ();
+	$template->spotdata = $query->fetchAll();
 	$template->pagPages = ceil ( $spotcount / 10 );
 	
 	return $template;

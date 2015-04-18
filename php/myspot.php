@@ -86,8 +86,8 @@ function getBasicSpotTemplate($db, $search=null) {
 
 	if ($search != null){
 		$template->title = "Suchergebnisse";
-		$stmt = $db->prepare ( "SELECT COUNT(*) FROM myspots WHERE name LIKE %?%" );
-		$stmt->execute(array($search));
+		$stmt = $db->prepare ( "SELECT COUNT(*) FROM myspots WHERE name LIKE ?" );
+		$stmt->execute(array("%{$search}%"));
 
 	} else {
 		$template->title = "Spotliste";
@@ -102,8 +102,8 @@ function getBasicSpotTemplate($db, $search=null) {
 	}
 	
 	if ($search != null){
-		$stmt = $db->prepare ( "SELECT name FROM myspots WHERE name LIKE %?% LIMIT " . (($pagNumber - 1) * 10) . ", 10" );
-		$stmt->execute(array($search));
+		$stmt = $db->prepare ( "SELECT name FROM myspots WHERE name LIKE ? LIMIT " . (($pagNumber - 1) * 10) . ", 10" );
+		$stmt->execute(array("%{$search}%"));
 	} else {
 		$stmt = $db->prepare ( "SELECT name FROM myspots LIMIT " . (($pagNumber - 1) * 10) . ", 10" );
 		$stmt->execute();

@@ -115,7 +115,7 @@ function getBasicSpotTemplate($db, $search=null) {
 	$template->currPagVal = $pagNumber;
 	$template->spotNrStart = $pagNumber * 10 - 9;
 	$template->spotNrEnd = min ( $pagNumber * 10, $spotcount );
-	$template->spotdata = $query->fetchAll();
+	$template->spotdata = $stmt->fetchAll();
 	$template->pagPages = ceil ( $spotcount / 10 );
 	
 	return $template;

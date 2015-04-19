@@ -16,7 +16,7 @@ function prepMyspotTemplate() {
 	
 	$usermgr = \grp12\user\userMgr::getInstance ();
 
-	if (isset ( $_POST["spotname"] ) { //add or modify
+	if (isset ( $_POST["spotname"] )) { //add or modify
 
 		if (! $usermgr->loggedin) {
 			header('Location: /login/');

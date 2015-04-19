@@ -1,30 +1,37 @@
-	  <h1><?=$title?></h1>
-	  <?php if(count($spotdata) > 0) { ?>
-	  <table id='datatbl'>
-	    <tr class='dataheadline'>
-	      <td class='dataheadcell'>Spotname</td>
-	      <td><td></td>
-	    </tr>
-	    <?php foreach($spotdata as $attribs) { ?>
-	    <tr class='dataline'>
-              <td class='datacell'><a href="/myspot/<?=$attribs["name"]?>/"><?=$attribs["name"]?></a></td></tr>
-	    <?php } ?>
-	  </table><br><br>
-	  Angezeigt werden Spots <?=$spotNrStart?> bis <?=$spotNrEnd?> von insgesamt <?=$spotCount?>.<br />
-	  <?php } else { ?>
-	  Keine Spots gefunden.
-	  <?php } ?>
-	  
-	  <?php if(isset($showPaginator)) {?>
-	<div id="paginator">
+<h1><?=$title?></h1>
+<div id="searchbar">
+	<form method="get">
+		<input type="text" name="search" id="search"/>
+		<button type="submit">Suchen</button>
+	</form>
+</div>
+<div id="spotlist">
+	<?php if(count($spotdata) > 0) { ?>
+	<table id='datatbl'>
+	<tr class='dataheadline'>
+	<td class='dataheadcell'>Spotname</td>
+	<td><td></td>
+	</tr>
+	<?php foreach($spotdata as $attribs) { ?>
+	<tr class='dataline'>
+	<td class='datacell'><a href="/myspot/<?=$attribs["name"]?>/"><?=$attribs["name"]?></a></td></tr>
+	<?php } ?>
+	</table><br><br>
+	Angezeigt werden Spots <?=$spotNrStart?> bis <?=$spotNrEnd?> von insgesamt <?=$spotCount?>.<br />
+	<?php } else { ?>
+	Keine Spots gefunden.
+	<?php } ?>
+</div>
+<?php if(isset($showPaginator)) {?>
+<div id="paginator">
 	<?php for($i = 1; $i <= $pagPages;++$i) {?>
 	<?php if (isset($search)) { ?>
 	<a href = "?search=<?=$search?>&page=<?=$i?>"><?=$i?></a>
 	<?php } else { ?>
 	<a href = "?page=<?=$i?>"><?=$i?></a>
 	<?php }}?>
-	</div>
-	<?php }?>
+</div>
+<?php }?>
 <?php if(isset($infomsg)) {?>
-<div id="infomsg"><?=$infomsg?></div>
+	<div id="infomsg"><?=$infomsg?></div>
 <?php } ?>

@@ -6,7 +6,7 @@
 <?php if(isset($images)) { foreach($images as $img){ ?>
 <tr><td colspan="2"><img alt="Bild von <?=$spotname?>" src="/images/<?=$img["filename"]."/".$img["filename_original"]?>"></td></tr>
 <?php }} else { ?>
-Zu diesem Spot wurde kein Bild gespeichert.
+<tr><td colspan="2">Zu diesem Spot wurde kein Bild gespeichert.</td></tr>
 <?php } ?></td></tr>
 <?php if($loggedin) {?>
 <tr><td colspan="2"><a href="edit/">Ändern</a></td></tr>

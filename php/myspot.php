@@ -128,6 +128,7 @@ function getBasicSpotTemplate($db, $search=null) {
 
 	if ($search != null){
 		$template->title = "Suchergebnisse";
+		$template->$search = $search;
 		$stmt = $db->prepare ( "SELECT COUNT(*) FROM myspots WHERE name LIKE ?" );
 		$stmt->execute(array("%{$search}%"));
 

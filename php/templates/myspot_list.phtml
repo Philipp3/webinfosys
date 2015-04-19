@@ -18,8 +18,11 @@
 	  <?php if(isset($showPaginator)) {?>
 	<div id="paginator">
 	<?php for($i = 1; $i <= $pagPages;++$i) {?>
-	<a href = "?page=<?=$i?>"><?=$i?></a> 
-	<?php }?>
+	<?php if (isset($search)) { ?>
+	<a href = "?search=<?=search?>&page=<?=$i?>"><?=$i?></a>
+	<?php } else { ?>
+	<a href = "?page=<?=$i?>"><?=$i?></a>
+	<?php }}?>
 	</div>
 	<?php }?>
 <?php if(isset($infomsg)) {?>

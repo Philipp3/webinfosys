@@ -111,7 +111,7 @@ function prepMyspotTemplate() {
 				$template->images = $stmt_i->fetchAll();
 			}
 			
-			preg_match_all("[-+]?[0-9]*\.?[0-9]+",$row["coordinates"],$coords_temp,PREG_SET_ORDER);
+			preg_match_all("/[-+]?[0-9]*\.?[0-9]+/",$row["coordinates"],$coords_temp,PREG_SET_ORDER);
 			$lat = floatval($coords_temp[0][0]);
 			$lon = floatval($coords_temp[1][0]);
 			$template->lat = $lat;

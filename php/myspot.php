@@ -126,7 +126,7 @@ function prepMyspotTemplate() {
 			$lon1 = $lon - 0.09 * cos($lat);
 
 			
-			$stmt_n = $db->prepare("SELECT name, astext(coordinates) as coordinates FROM myspots WHERE MBRContains(envelope(linestring(point(:lat0, :lon0), point(:lat1, :lon1))),coordinates) ORDER BY ST_Distance(point(:lat, :lon),coordinates) ASC LIMIT 10");
+			$stmt_n = $db->prepare("SELECT name, astext(ST_Distance(point(:lat, :lon),coordinates)) as dist FROM myspots WHERE MBRContains(envelope(linestring(point(:lat0, :lon0), point(:lat1, :lon1))),coordinates) ORDER BY ST_Distance(point(:lat, :lon),coordinates) ASC LIMIT 10");
 			$stmt_n -> execute(array(":lat0" => $lat0, ":lon0" => $lon0, ":lat1" => $lat1, ":lon1" => $lon1, ":lat" => $lat, ":lon" => $lon));
 
 			if ($stmt_n ->rowCount() > 0){

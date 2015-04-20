@@ -117,17 +117,22 @@ function prepMyspotTemplate() {
 			$template->lat = $lat;
 			$template->lon = $lon;
 					
-			//lat/breite: 1° ~ 111 km => 10 km ~~ 0.09°
-			//lon/länge: 1°*cos(lat) ~111km, 10km ~~ 0.09°*cos(lat)
+			//lat/breite: 1° ~ 111 km
+			//lon/länge: 1°*cos(lat) ~ 111km
+			
+			$dist = 10;
+			$radius = $dist/111;
 
-			$lat0 = $lat + 0.09;
-			$lon0 = $lon + 0.09 * cos($lat);
-			$lat1 = $lat - 0.09;
-			$lon1 = $lon - 0.09 * cos($lat);
+			$lat0 = $lat + $radius;
+			$lon0 = $lon + $radius * abs(cos(deg2rad($lat)));
+
+			$lat1 = $lat - $radius;
+			$lon1 = $lon - $radius * abs(cos(deg2rad($lat)));
 
 			
-			$stmt_n = $db->prepare("SELECT name, ST_Distance(point(:lat, :lon),coordinates) as dist FROM myspots WHERE MBRContains(envelope(linestring(point(:lat0, :lon0), point(:lat1, :lon1))),coordinates) ORDER BY ST_Distance(point(:lat, :lon),coordinates) ASC LIMIT 10");
-			$stmt_n -> execute(array(":lat0" => $lat0, ":lon0" => $lon0, ":lat1" => $lat1, ":lon1" => $lon1, ":lat" => $lat, ":lon" => $lon));
+			$start_time = microtime(true);
+			$stmt_n = $db->prepare("SELECT name, ST_Distance(point(:lat, :lon),coordinates) as dist FROM myspots WHERE MBRContains(envelope(linestring(point(:lat0, :lon0), point(:lat1, :lon1))),coordinates) and name != :name ORDER BY ST_Distance(point(:lat, :lon),coordinates) ASC LIMIT 10");
+			$stmt_n -> execute(array(":name" => $spotname":lat0" => $lat0, ":lon0" => $lon0, ":lat1" => $lat1, ":lon1" => $lon1, ":lat" => $lat, ":lon" => $lon));			$template->time = microtime(true) - $start_time;
 
 			if ($stmt_n ->rowCount() > 0){
 				$template->nearby = $stmt_n->fetchAll();
@@ -153,13 +158,17 @@ function getBasicSpotTemplate($db, $search=null) {
 	if ($search != null){
 		$template->title = "Suchergebnisse";
 		$template->search = $search;
+		$start_time = microtime(true);
 		$stmt = $db->prepare ( "SELECT COUNT(*) FROM myspots WHERE name LIKE ?" );
 		$stmt->execute(array("%{$search}%"));
+		$template->time = microtime(true) - $start_time;
 
 	} else {
 		$template->title = "Spotliste";
+		$start_time = microtime(true);
 		$stmt = $db->prepare ( "SELECT COUNT(*) FROM myspots" );
 		$stmt->execute();
+		$template->time = microtime(true) - $start_time;
 	}
 
 	$spotcount = $stmt->fetch()[0];

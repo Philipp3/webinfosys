@@ -12,7 +12,7 @@
 <?php } ?></td></tr>
 
 <?php if(isset($nearby)) { ?>
-<tr><td colspan="2">In der Nähe:</td></tr>
+<tr><td colspan="2">In der Nähe: (gefunden in <?=$time?></td></tr>
 <?php foreach($nearby as $near){ ?>
 <tr><td><a href="/myspot/<?=$near["name"]?>"><?=$near["name"]?></a></td><td><?=$near["dist"]?></td></tr>
 <?php } } else { ?>

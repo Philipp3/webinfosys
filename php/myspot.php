@@ -132,7 +132,7 @@ function prepMyspotTemplate() {
 			
 			$start_time = microtime(true);
 			$stmt_n = $db->prepare("SELECT name, ST_Distance(point(:lat, :lon),coordinates) as dist FROM myspots WHERE MBRContains(envelope(linestring(point(:lat0, :lon0), point(:lat1, :lon1))),coordinates) and name != :name ORDER BY ST_Distance(point(:lat, :lon),coordinates) ASC LIMIT 10");
-			$stmt_n -> execute(array(":name" => $spotname, ":lat0" => $lat0, ":lon0" => $lon0, ":lat1" => $lat1, ":lon1" => $lon1, ":lat" => $lat, ":lon" => $lon));			$template->time = microtime(true) - $start_time;
+			$stmt_n -> execute(array(":name" => $spotname, ":lat0" => $lat0, ":lon0" => $lon0, ":lat1" => $lat1, ":lon1" => $lon1, ":lat" => $lat, ":lon" => $lon));			$template->time = (microtime(true) - $start_time)*1000;
 
 			if ($stmt_n ->rowCount() > 0){
 				$template->nearby = $stmt_n->fetchAll();
@@ -161,14 +161,14 @@ function getBasicSpotTemplate($db, $search=null) {
 		$start_time = microtime(true);
 		$stmt = $db->prepare ( "SELECT COUNT(*) FROM myspots WHERE name LIKE ?" );
 		$stmt->execute(array("%{$search}%"));
-		$template->time = microtime(true) - $start_time;
+		$template->time = (microtime(true) - $start_time)*1000;
 
 	} else {
 		$template->title = "Spotliste";
 		$start_time = microtime(true);
 		$stmt = $db->prepare ( "SELECT COUNT(*) FROM myspots" );
 		$stmt->execute();
-		$template->time = microtime(true) - $start_time;
+		$template->time = (microtime(true) - $start_time)*1000;
 	}
 
 	$spotcount = $stmt->fetch()[0];

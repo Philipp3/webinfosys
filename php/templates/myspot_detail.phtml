@@ -3,6 +3,7 @@
 <tr><td>Name</td><td><?=$spotname?></td></tr>
 <tr><td>Ort</td><td><?=$spotloc?></td></tr>
 <tr><td>Beschreibung</td><td><?=$spotdesc?></td></tr>
+<tr><td>Koordinaten</td><td><?=$spotcoord?></td></tr>
 <?php if(isset($images)) { foreach($images as $img){ ?>
 <tr><td colspan="2"><img alt="Bild von <?=$spotname?>" src="/images/<?=$img["filename"]."/".$img["filename_original"]?>"></td></tr>
 <?php }} else { ?>

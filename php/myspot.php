@@ -57,7 +57,7 @@ function prepMyspotTemplate() {
 	} else if (isset ( $_GET ["spotname"] )) { //single spot, display or action
 
 		$spotname = $_GET["spotname"];
-		$stmt = $db->prepare("SELECT * FROM myspots WHERE name=?");
+		$stmt = $db->prepare("SELECT name,location,description,astext(coordinates) as coordinates FROM myspots WHERE name=?");
 		$stmt->execute(array($spotname));
 
 		if ($stmt->rowCount () <= 0) {
@@ -103,6 +103,7 @@ function prepMyspotTemplate() {
 			$template->spotname = $row ["name"];
 			$template->spotloc = $row ["location"];
 			$template->spotdesc = $row ["description"];
+			$template->spotcoord = $row["coordinates"];
 			$template->loggedin = $usermgr->loggedin;
 
 			$stmt_i = $db->prepare("SELECT * FROM myspots_images WHERE name=?");
@@ -110,6 +111,8 @@ function prepMyspotTemplate() {
 			if ($stmt_i->rowCount() > 0){
 				$template->images = $stmt_i->fetchAll();
 			}
+			
+			//$stmt_n = $db->prepare("SELECT name, astext(coordinates) FROM myspots WHERE MBRContains(envelope(linestring(point(:lat0, :lon0), point(:lat1, :lon1))),coordinates) ORDER BY ST_Distance(point(:lat, :lon),coordinates) ASC LIMIT 10");
 
 		}
 	} else {

@@ -73,11 +73,11 @@ function prepMyspotTemplate() {
 				return $template;
 			}
 
-			if ($_GET ["action"] == "delete") {
+			if ($_GET ["action"] == "delete") { 
 
 				//TODO delete image files
 
-				$stmt = $db->prepare("DELETE FROM myspots, myspots_images WHERE name=?");
+				$stmt = $db->prepare("DELETE FROM myspots WHERE name=?"); //!!
 				$stmt->execute(array($spotname));
 
 				$template = getBasicSpotTemplate ($db);

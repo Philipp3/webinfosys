@@ -132,7 +132,7 @@ function prepMyspotTemplate() {
 			
 			$start_time = microtime(true);
 			$stmt_n = $db->prepare("SELECT name, ST_Distance(point(:lat, :lon),coordinates) as dist FROM myspots WHERE MBRContains(envelope(linestring(point(:lat0, :lon0), point(:lat1, :lon1))),coordinates) and name != :name ORDER BY ST_Distance(point(:lat, :lon),coordinates) ASC LIMIT 10");
-			$stmt_n -> execute(array(":name" => $spotname":lat0" => $lat0, ":lon0" => $lon0, ":lat1" => $lat1, ":lon1" => $lon1, ":lat" => $lat, ":lon" => $lon));			$template->time = microtime(true) - $start_time;
+			$stmt_n -> execute(array(":name" => $spotname, ":lat0" => $lat0, ":lon0" => $lon0, ":lat1" => $lat1, ":lon1" => $lon1, ":lat" => $lat, ":lon" => $lon));			$template->time = microtime(true) - $start_time;
 
 			if ($stmt_n ->rowCount() > 0){
 				$template->nearby = $stmt_n->fetchAll();

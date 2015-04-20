@@ -3,12 +3,20 @@
 <tr><td>Name</td><td><?=$spotname?></td></tr>
 <tr><td>Ort</td><td><?=$spotloc?></td></tr>
 <tr><td>Beschreibung</td><td><?=$spotdesc?></td></tr>
-<tr><td>Koordinaten</td><td><?=$spotcoord?></td></tr>
+<tr><td>Koordinaten</td><td><?=$lat?>; <?=$lon></td></tr>
+
 <?php if(isset($images)) { foreach($images as $img){ ?>
 <tr><td colspan="2"><img alt="Bild von <?=$spotname?>" src="/images/<?=$img["filename"]."/".$img["filename_original"]?>"></td></tr>
 <?php }} else { ?>
 <tr><td colspan="2">Zu diesem Spot wurde kein Bild gespeichert.</td></tr>
 <?php } ?></td></tr>
+
+<?php if(isset($nearby)) { foreach($nearby as $near){ ?>
+<tr><td colspan="2"><?=$near["name"]?></td></tr>
+<?php }} else { ?>
+<tr><td colspan="2">Keine Spots in der Nähe.</td></tr>
+<?php } ?></td></tr>
+
 <?php if($loggedin) {?>
 <tr><td colspan="2"><a href="edit/">Ändern</a></td></tr>
 <tr><td colspan="2"><a href="delete/">Löschen</a></td></tr>

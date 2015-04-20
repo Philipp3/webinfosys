@@ -103,7 +103,6 @@ function prepMyspotTemplate() {
 			$template->spotname = $row ["name"];
 			$template->spotloc = $row ["location"];
 			$template->spotdesc = $row ["description"];
-			$template->spotcoord = $row["coordinates"];
 			$template->loggedin = $usermgr->loggedin;
 
 			$stmt_i = $db->prepare("SELECT * FROM myspots_images WHERE name=?");
@@ -112,7 +111,29 @@ function prepMyspotTemplate() {
 				$template->images = $stmt_i->fetchAll();
 			}
 			
-			//$stmt_n = $db->prepare("SELECT name, astext(coordinates) FROM myspots WHERE MBRContains(envelope(linestring(point(:lat0, :lon0), point(:lat1, :lon1))),coordinates) ORDER BY ST_Distance(point(:lat, :lon),coordinates) ASC LIMIT 10");
+			preg_match_all("[-+]?[0-9]*\.?[0-9]+",$row["coordinates"],$coords_temp,PREG_SET_ORDER);
+			$lat = floatval($coords_temp[0][0]);
+			$lon = floatval($coords_temp[1][0]);
+			$template->lat = $lat;
+			$template->lon = $lon;
+					
+			//lat/breite: 1° ~ 111 km => 10 km ~~ 0.09°
+			//lon/länge: 1°*cos(lat) ~111km, 10km ~~ 0.09°*cos(lat)
+
+			$lat0 = $lat + 0.09;
+			$lon0 = $lon + 0.09 * cos($lat);
+			$lat1 = $lat - 0.09;
+			$lon1 = $lon - 0.09 * cos($lat);
+
+			
+			$stmt_n = $db->prepare("SELECT name, astext(coordinates) as coordinates FROM myspots WHERE MBRContains(envelope(linestring(point(:lat0, :lon0), point(:lat1, :lon1))),coordinates) ORDER BY ST_Distance(point(:lat, :lon),coordinates) ASC LIMIT 10");
+			$stmt_n -> execute(array(":lat0" => $lat0, ":lon0" => $lon0, ":lat1" => $lat1, ":lon1" => $lon1, ":lat" => $lat, ":lon" => $lon));
+
+			if ($stmt_n ->rowCount() > 0){
+				$template->nearby = $stmt_n->fetchAll();
+			}
+
+			
 
 		}
 	} else {

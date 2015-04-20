@@ -11,8 +11,10 @@
 <tr><td colspan="2">Zu diesem Spot wurde kein Bild gespeichert.</td></tr>
 <?php } ?></td></tr>
 
-<?php if(isset($nearby)) { foreach($nearby as $near){ ?>
-<tr><td colspan="2"><?=$near["name"]?></td></tr>
+<?php if(isset($nearby)) { ?>
+<tr><td colspan="2">In der Nähe:</td></tr>
+<?foreach($nearby as $near){ ?>
+<tr><td colspan="2"><a href="<?=$near["name"]?>"><?=$near["name"]?></a></td></tr>
 <?php }} else { ?>
 <tr><td colspan="2">Keine Spots in der Nähe.</td></tr>
 <?php } ?></td></tr>

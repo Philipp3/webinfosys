@@ -24,12 +24,21 @@
 </div>
 <?php if(isset($showPaginator)) {?>
 <div id="paginator">
-	<?php for($i = 1; $i <= $pagPages;++$i) {?>
+	<?php if (isset($search)) { ?>
+	<a href = "?search=<?=$search?>&page=1">1</a>
+	<?php } else { ?>
+	<a href = "?page=1">1</a>
+	<?php } for($i = $currPagVal - 10; $i <= $currPagVal + 10 ;++$i) {?>
+	<?php if($i > 1 && $i < $pagPages){ ?>
 	<?php if (isset($search)) { ?>
 	<a href = "?search=<?=$search?>&page=<?=$i?>"><?=$i?></a>
 	<?php } else { ?>
 	<a href = "?page=<?=$i?>"><?=$i?></a>
-	<?php }}?>
+	<?php }}}?>
+	<?php if (isset($search)) { ?>
+	<a href = "?search=<?=$search?>&page=<?=$pagPages?>"><?=$pagPages?></a>
+	<?php } else { ?>
+	<a href = "?page=<?=$pagPages?>"><?=$pagPages?></a>
 </div>
 <?php }?>
 <?php if(isset($infomsg)) {?>

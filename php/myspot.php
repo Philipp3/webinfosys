@@ -158,17 +158,13 @@ function getBasicSpotTemplate($db, $search=null) {
 	if ($search != null){
 		$template->title = "Suchergebnisse";
 		$template->search = $search;
-		$start_time = microtime(true);
 		$stmt = $db->prepare ( "SELECT COUNT(*) FROM myspots WHERE name LIKE ?" );
 		$stmt->execute(array("%{$search}%"));
-		$template->time = (microtime(true) - $start_time)*1000;
 
 	} else {
 		$template->title = "Spotliste";
-		$start_time = microtime(true);
 		$stmt = $db->prepare ( "SELECT COUNT(*) FROM myspots" );
 		$stmt->execute();
-		$template->time = (microtime(true) - $start_time)*1000;
 	}
 
 	$spotcount = $stmt->fetch()[0];
@@ -178,15 +174,19 @@ function getBasicSpotTemplate($db, $search=null) {
 	}
 	
 	if ($search != null){
+		$start_time = microtime(true);
 		$stmt = $db->prepare ( "SELECT name FROM myspots WHERE name LIKE ? LIMIT " . (($pagNumber - 1) * 10) . ", 10" );
 		$stmt->execute(array("%{$search}%"));
+		$template->time = (microtime(true) - $start_time)*1000;
 	} else {
+		$start_time = microtime(true);
 		$stmt = $db->prepare ( "SELECT name FROM myspots LIMIT " . (($pagNumber - 1) * 10) . ", 10" );
 		$stmt->execute();
+		$template->time = (microtime(true) - $start_time)*1000;
 	}
 
 	if ($spotcount > 10)
-		$template->showPaginator = true;
+	$template->showPaginator = true;
 	$template->spotCount = $spotcount;
 	$template->currPagVal = $pagNumber;
 	$template->spotNrStart = $pagNumber * 10 - 9;

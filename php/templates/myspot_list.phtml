@@ -1,7 +1,7 @@
 <h1><?=$title?></h1>
 <div id="searchbar">
 	<form method="get">
-		<input type="text" name="search" id="search"/>
+		<input type="text" name="search" id="search" <?php if(isset($search){?>value="<?=$search?>"<?php } ?>/>
 		<button type="submit">Suchen</button>
 	</form>
 </div>

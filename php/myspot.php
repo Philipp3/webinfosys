@@ -39,21 +39,23 @@ function prepMyspotTemplate() {
 				$template->infomsg = "Fehler: Spot $spotname existiert bereits.";
 				return $template;
 			}
-			$stmt = $db -> prepare("UPDATE myspots SET location=:location, description=:description, coordinates=:coords WHERE name=:name");
+			$stmt = $db -> prepare("UPDATE myspots SET location=:location, description=:description, coordinates=point(:lat, :lon), WHERE name=:name");
 			$stmt -> execute(array(
 					":name" => $spotname,
 					":location" => $_POST["loc"], 
 					":description" => $_POST["desc"],
-					":coords" => $_POST["lat"]." ".$_POST["long"]
+					":lat" => $_POST["lat"],
+					":lon" => $_POST["long"]
 			));
 			$template->infomsg = "Spot $spotname geändert.";
 		} else { //add
-			$stmt = $db -> prepare("INSERT INTO myspots(name,location,description,coordinates) VALUES(:name,:location,:description,GeomFromText(:coords,0))");
+			$stmt = $db -> prepare("INSERT INTO myspots(name,location,description,coordinates) VALUES(:name,:location,:description,point(:lat, :lon))");
 			$stmt -> execute(array(
 					":name" => $spotname, 
 					":location" => $_POST["loc"], 
 					":description" => $_POST["desc"],
-					":coords" => $_POST["lat"]." ".$_POST["long"]
+					":lat" => $_POST["lat"],
+					":lon" => $_POST["long"]
 			));
 			$template->infomsg = "#Spot $spotname hinzugefügt.";
 		}

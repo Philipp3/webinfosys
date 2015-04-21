@@ -13,8 +13,8 @@
 
 <?php if(isset($nearby)) { ?>
 <tr><td colspan="2">In der Nähe: (gefunden in <?=$time?>ms)</td></tr>
-<?php foreach($nearby as $near){ ?>
-<tr><td><a href="/myspot/<?=$near["name"]?>"><?=$near["name"]?></a></td><td><?=$near["dist"]?></td></tr>
+<?php foreach($nearby as $nearname => $neardist){ ?>
+<tr><td><a href="/myspot/<?=$nearname?>"><?=$nearname?></a></td><td><?=$neardist?> km</td></tr>
 <?php } } else { ?>
 <tr><td colspan="2">Keine Spots in der Nähe.</td></tr>
 <?php } ?></td></tr>

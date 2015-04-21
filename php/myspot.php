@@ -135,7 +135,12 @@ function prepMyspotTemplate() {
 			$stmt_n -> execute(array(":name" => $spotname, ":lat0" => $lat0, ":lon0" => $lon0, ":lat1" => $lat1, ":lon1" => $lon1, ":lat" => $lat, ":lon" => $lon));			$template->time = (microtime(true) - $start_time)*1000;
 
 			if ($stmt_n ->rowCount() > 0){
-				$template->nearby = $stmt_n->fetchAll();
+				$data = $stmt_n->fetchAll();
+				$templatedata = array();
+				foreach($data as $near) {
+					$templatedata[$near["name"]] = round($near["dist"]*40000/360, 2);
+				}
+				$template->nearby = $templatedata;
 			}
 
 			

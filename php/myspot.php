@@ -103,10 +103,6 @@ function prepMyspotTemplate() {
 				$template->action="edit";
 				$template->title = $spotname . " ändern";
 				
-			} else if($_GET["action"] == "new") {
-				$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_edit.phtml" );
-				$template->action="new";
-				$template->title="Neuen Spot hinzufügen";
 			} else {
 				$template = getBasicSpotTemplate ($db);
 				$template->infomsg = "Ungültige Aktion.";
@@ -163,6 +159,11 @@ function prepMyspotTemplate() {
 
 		}
 	} else {
+		if($_GET["action"] == "new") {
+			$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_edit.phtml" );
+			$template->action="new";
+			$template->title="Neuen Spot hinzufügen";
+		} else
 		// Simple spot list without any other settings
 		$template = getBasicSpotTemplate ($db);
 	}

@@ -17,7 +17,7 @@
 	<td class='datacell'><a href="/myspot/<?=$attribs["name"]?>/"><?=$attribs["name"]?></a></td></tr>
 	<?php } ?>
 	</table><br><br>
-	Angezeigt werden Spots <?=$spotNrStart?> bis <?=$spotNrEnd?> von insgesamt <?=$spotCount?>, in <? echo(round($time,3)); ?> ms.<br />
+	Angezeigt werden Spots <?=$spotNrStart?> bis <?=$spotNrEnd?> von insgesamt <?=$spotCount?>, in <?php echo(round($time,3)); ?> ms.<br />
 	<?php } else { ?>
 	Keine Spots gefunden.
 	<?php } ?>

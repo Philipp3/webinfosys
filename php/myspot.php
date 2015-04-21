@@ -39,7 +39,7 @@ function prepMyspotTemplate() {
 				$template->infomsg = "Fehler: Spot $spotname existiert bereits.";
 				return $template;
 			}
-			$stmt = $db -> prepare("UPDATE myspots SET location=:location, description=:description, coordinates=point(:lat, :lon), WHERE name=:name");
+			$stmt = $db -> prepare("UPDATE myspots SET location=:location, description=:description, coordinates=point(:lat, :lon) WHERE name=:name");
 			$stmt -> execute(array(
 					":name" => $spotname,
 					":location" => $_POST["loc"], 

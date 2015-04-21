@@ -4,7 +4,7 @@
 <tr><td><label for="name">Name</label></td><td>
 <?php if($action=="new") {?><input type="text" name="name" id="name" value="<?php if(isset($editspotname)) echo($editspotname);?>" /><?php }
 else if ($action=="edit") {?> <?=$editspotname?><input type="hidden" name="name" id="name" value="<?php if(isset($editspotname)) echo($editspotname);?>" />
-}
+<?php }?>
 </td></tr>
 <tr><td><label for="loc" >Ort</label></td><td><input type="text" name="loc" id="loc" value="<?php if(isset($editspotloc)) echo($editspotloc);?>" /></td></tr>
 <tr><td><label for="desc">Beschreibung</label></td><td><input type="text" name="desc" id="desc" value="<?php if(isset($editspotdesc)) echo($editspotdesc);?>" /></td></tr>

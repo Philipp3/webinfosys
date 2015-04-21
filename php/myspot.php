@@ -16,14 +16,14 @@ function prepMyspotTemplate() {
 	
 	$usermgr = \grp12\user\userMgr::getInstance ();
 
-	if (isset ( $_POST["spotname"] )) { //add or modify
+	if (isset ( $_POST["name"] )) { //add or modify
 
 		if (! $usermgr->loggedin) {
 			header('Location: /login/');
 			die();
 		}
 
-		$spotname = $_POST["spotname"];
+		$spotname = $_POST["name"];
 		$template = getBasicSpotTemplate ($db);
 
 		if ($spotname == ""){
@@ -35,6 +35,10 @@ function prepMyspotTemplate() {
 		$stmt->execute(array($spotname));
 
 		if ($stmt->rowCount () > 0) { //edit
+			if($_POST["newspotaction"] == "new") {
+				$template->infomsg = "Fehler: Spot $spotname existiert bereits.";
+				return $template;
+			}
 			$stmt = $db -> prepare("UPDATE myspots SET location=:location, description=:description WHERE name=:name");
 			$stmt -> execute(array(":name" => $spotname, ":location" => $_POST["loc"], ":description" => $_POST["desc"]));
 			$infomsg = "#Spot $spotname geändert";
@@ -85,13 +89,25 @@ function prepMyspotTemplate() {
 
 			} else if ($_GET ["action"] == "edit") {
 
-				$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_modify.phtml" );
+				$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_edit.phtml" );
 
-				$template->defaults = $stmt->fetch();
-				$template->header = $spotname . " ändern";
+				$defaults = $stmt->fetch();
+				$template->editspotname=$defaults["name"];
+				$template->editspotloc=$defaults["location"];
+				$template->editspotdesc=$defaults["description"];
+				preg_match_all("/[-+]?[0-9]*\.?[0-9]+/",$defaults["coordinates"],$coords_temp,PREG_SET_ORDER);
+				$lat = floatval($coords_temp[0][0]);
+				$lon = floatval($coords_temp[1][0]);
+				$template->editspotlat = $lat;
+				$template->editspotlong = $lon;
+				$template->action="edit";
+				$template->title = $spotname . " ändern";
 				
+			} else if($_GET["action"] == "new") {
+				$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_edit.phtml" );
+				$template->action="new";
+				$template->title="Neuen Spot hinzufügen";
 			} else {
-
 				$template = getBasicSpotTemplate ($db);
 				$template->infomsg = "Ungültige Aktion.";
 			}

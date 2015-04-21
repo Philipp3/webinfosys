@@ -17,7 +17,7 @@
 	<td class='datacell'><a href="/myspot/<?=$attribs["name"]?>/"><?=$attribs["name"]?></a></td></tr>
 	<?php } ?>
 	</table><br><br>
-	Angezeigt werden Spots <?=$spotNrStart?> bis <?=$spotNrEnd?> von insgesamt <?=$spotCount?>, in <?=$time?>ms<br />
+	Angezeigt werden Spots <?=$spotNrStart?> bis <?=$spotNrEnd?> von insgesamt <?=$spotCount?>, in <? echo(round($time,3)); ?> ms.<br />
 	<?php } else { ?>
 	Keine Spots gefunden.
 	<?php } ?>
@@ -34,8 +34,11 @@
 	<a href = "?search=<?=$search?>&page=<?=$i?>"><?=$i?></a>
 	<?php } else { ?>
 	<a href = "?page=<?=$i?>"><?=$i?></a>
-	<?php }}}?>
-	<?php if (isset($search)) { ?>
+	<?php }}}
+	if($currPagVal + 11 < $pagPages) { ?>
+	 ... 
+	<?php }
+	if (isset($search)) { ?>
 	<a href = "?search=<?=$search?>&page=<?=$pagPages?>"><?=$pagPages?></a>
 	<?php } else { ?>
 	<a href = "?page=<?=$pagPages?>"><?=$pagPages?></a>

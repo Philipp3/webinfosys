@@ -46,7 +46,7 @@ function prepMyspotTemplate() {
 					":description" => $_POST["desc"],
 					":coords" => $_POST["lat"]." ".$_POST["long"]
 			));
-			$template->infomsg = "#Spot $spotname geändert";
+			$template->infomsg = "Spot $spotname geändert.";
 		} else { //add
 			$stmt = $db -> prepare("INSERT INTO myspots(name,location,description,coordinates) VALUES(:name,:location,:description,GeomFromText(:coords,0))");
 			$stmt -> execute(array(
@@ -55,7 +55,7 @@ function prepMyspotTemplate() {
 					":description" => $_POST["desc"],
 					":coords" => $_POST["lat"]." ".$_POST["long"]
 			));
-			$template->infomsg = "#Spot $spotname hinzugefügt";
+			$template->infomsg = "#Spot $spotname hinzugefügt.";
 		}
 
 	} else if (isset ( $_GET ["search"] )) {  //search
@@ -186,6 +186,10 @@ function getBasicSpotTemplate($db, $search=null) {
 	if (isset ( $_GET ["page"] ) && is_numeric ( $_GET ["page"] ))
 		$pagNumber = $_GET ["page"];
 	$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_list.phtml" );
+	
+	$usermgr = \grp12\user\userMgr::getInstance ();
+	
+	$template->loggedin = $usermgr->loggedin;
 
 	if ($search != null){
 		$template->title = "Suchergebnisse";

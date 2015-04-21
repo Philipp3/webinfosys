@@ -45,6 +45,11 @@
 	<?php } ?>
 </div>
 <?php }?>
+<br><br>
 <?php if(isset($infomsg)) {?>
 	<div id="infomsg"><?=$infomsg?></div>
-<?php } ?>
+<br><br>
+	<?php } if($loggedin) {?>
+	<a href="/myspot/?action=new">Neuen Spot anlegen</a>
+	<?php }?>
+	

@@ -21,8 +21,8 @@
 <?php } ?></td></tr>
 
 <?php if($loggedin) {?>
-<tr style="margin-top: 20px"><td colspan="2"><a href="edit/">Ändern</a></td></tr>
-<tr><td colspan="2"><a href="delete/">Löschen</a></td></tr>
+<tr style="margin-top: 20px"><td colspan="2"><a href="<?=$spotname?>/edit/">Ändern</a></td></tr>
+<tr><td colspan="2"><a href="<?=$spotname?>/delete/">Löschen</a></td></tr>
 <?php } else { ?>
 <tr><td colspan="2">Sie sind nicht angemeldet. Bitte <a href="/login/">melden Sie sich an</a>, um Spots zu bearbeiten oder zu löschen.</td></tr>
 <?php } ?>

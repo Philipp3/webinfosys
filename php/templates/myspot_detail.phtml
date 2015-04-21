@@ -12,7 +12,7 @@
 <?php } ?></td></tr>
 
 <?php if(isset($nearby)) { ?>
-<tr style="margin-top: 20px"><td colspan="2">In der Nähe: (gefunden in <? echo(round($time,3)); ?> ms)</td></tr>
+<tr style="margin-top: 40px"><td colspan="2">In der Nähe: (gefunden in <? echo($time); ?> ms)</td></tr>
 <tr><th>Name</th><th>Abstand</th></tr>
 <?php foreach($nearby as $nearname => $neardist){ ?>
 <tr><td><a href="/myspot/<?=$nearname?>"><?=$nearname?></a></td><td><?=$neardist?> km</td></tr>

@@ -35,7 +35,7 @@ function prepMyspotTemplate() {
 		$stmt->execute(array($spotname));
 
 		if ($stmt->rowCount () > 0) { //edit
-			if($_POST["newspotaction"] == "new") {
+			if($_POST["action"] == "new") {
 				$template->infomsg = "Fehler: Spot $spotname existiert bereits.";
 				return $template;
 			}
@@ -46,7 +46,7 @@ function prepMyspotTemplate() {
 					":description" => $_POST["desc"],
 					":coords" => $_POST["lat"]." ".$_POST["long"]
 			));
-			$infomsg = "#Spot $spotname geändert";
+			$template->infomsg = "#Spot $spotname geändert";
 		} else { //add
 			$stmt = $db -> prepare("INSERT INTO myspots(name,location,description,coordinates) VALUES(:name,:location,:description,GeomFromText(:coords,0))");
 			$stmt -> execute(array(
@@ -55,7 +55,7 @@ function prepMyspotTemplate() {
 					":description" => $_POST["desc"],
 					":coords" => $_POST["lat"]." ".$_POST["long"]
 			));
-			$infomsg = "#Spot $spotname hinzugefügt";
+			$template->infomsg = "#Spot $spotname hinzugefügt";
 		}
 
 	} else if (isset ( $_GET ["search"] )) {  //search

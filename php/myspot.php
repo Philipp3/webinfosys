@@ -169,7 +169,7 @@ function prepMyspotTemplate() {
 
 		}
 	} else {
-		if($_GET["action"] == "new") {
+		if(isset($_GET["action"]) && $_GET["action"] == "new") {
 			$template = new \grp12\template\Template ( SERVERPATH . "php/templates/myspot_edit.phtml" );
 			$template->action="new";
 			$template->title="Neuen Spot hinzufügen";

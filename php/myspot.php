@@ -38,7 +38,7 @@ function prepMyspotTemplate() {
 		
 		
 		
-		if(isset($_FILES["img"])) {
+		if(true || isset($_FILES["img"])) {
 			echo("allesgut");
 			die("FDSA");
 			$file = true;

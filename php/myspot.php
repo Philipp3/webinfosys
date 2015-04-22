@@ -38,7 +38,7 @@ function prepMyspotTemplate() {
 		
 		if(isset($_FILES["img"]["tmp_name"])) {
 			$file = true;
-			if(move_uploaded_file($_FILES["img"]["tmp_name"],SERVERPATH."img/".$_FILES["img"]["tmp_name"])) {
+			if(move_uploaded_file($_FILES["img"]["tmp_name"],SERVERPATH."images/".$_FILES["img"]["tmp_name"])) {
 			} else {
 				$template->infomsg = "Fehler beim File-upload.";
 				return $template;
@@ -63,7 +63,7 @@ function prepMyspotTemplate() {
 				$stmt = $db -> prepare("UPDATE myspots_images SET filename=:filename, filename_original=:forig WHERE name=:name");
 				$stmt -> execute(array(
 						":name" => $spotname,
-						":filename" => SERVERPATH."img/".$_FILES["img"]["tmp_name"],
+						":filename" => $_FILES["img"]["tmp_name"],
 						":forig" => $_FILES["img"]["name"]
 						));
 			}
@@ -81,7 +81,7 @@ function prepMyspotTemplate() {
 				$stmt = $db -> prepare("INSERT INTO myspots_images(name,filename,filename_original) VALUES(:name,:filename,:forig)");
 				$stmt -> execute(array(
 						":name" => $spotname,
-						":filename" => SERVERPATH."img/".$_FILES["img"]["tmp_name"],
+						":filename" => $_FILES["img"]["tmp_name"],
 						":forig" => $_FILES["img"]["name"]
 						));
 			}

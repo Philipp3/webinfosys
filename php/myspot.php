@@ -37,7 +37,7 @@ function prepMyspotTemplate() {
 		$file = false;
 		
 		
-		if(isset($_FILES["img"])) {
+		if(isset($_FILES["img"]["name"])&&$_FILES["img"]["name"]!="") {
 			$file = true;
 			if(move_uploaded_file($_FILES["img"]["tmp_name"],SERVERPATH."images/".basename($_FILES["img"]["name"]))) {
 			} else {
@@ -68,7 +68,7 @@ function prepMyspotTemplate() {
 						":forig" => basename($_FILES["img"]["name"])
 						));
 			}
-			$template->infomsg = "Spot $spotname geändert. $file";
+			$template->infomsg = "Spot $spotname geändert.";
 		} else { //add
 			$stmt = $db -> prepare("INSERT INTO myspots(name,location,description,coordinates) VALUES(:name,:location,:description,point(:lat, :lon))");
 			$stmt -> execute(array(
@@ -86,7 +86,7 @@ function prepMyspotTemplate() {
 						":forig" => basename($_FILES["img"]["name"])
 						));
 			}
-			$template->infomsg = "Spot $spotname hinzugefügt. $file";
+			$template->infomsg = "Spot $spotname hinzugefügt.";
 		}
 
 	} else if (isset ( $_GET ["search"] )) {  //search

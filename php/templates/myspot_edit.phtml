@@ -4,10 +4,11 @@ function submit() {
 	if(document.forms["fmain"]["name"].value == ""||document.forms["fmain"]["name"].value == null) {
 		alert("Feld Name darf nicht leer sein.");
 	}
+	alert("k");
 	return false;
 }
 </script>
-<form name="fmain" enctype="multipart/form-data" action="/myspot/" method="post" onsubmit="alert('men')";>
+<form name="fmain" enctype="multipart/form-data" action="/myspot/" method="post" onsubmit="submit()";>
 <table>
 <tr><td><label for="name">Name</label></td><td>
 <?php if($action=="new") {?><input type="text" name="name" id="name" required value="<?php if(isset($editspotname)) echo($editspotname);?>" /><?php }

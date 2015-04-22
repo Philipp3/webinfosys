@@ -67,7 +67,7 @@ function prepMyspotTemplate() {
 						":forig" => $_FILES["img"]["name"]
 						));
 			}
-			$template->infomsg = "Spot $spotname geändert.";
+			$template->infomsg = "Spot $spotname geändert. $file";
 		} else { //add
 			$stmt = $db -> prepare("INSERT INTO myspots(name,location,description,coordinates) VALUES(:name,:location,:description,point(:lat, :lon))");
 			$stmt -> execute(array(
@@ -85,7 +85,7 @@ function prepMyspotTemplate() {
 						":forig" => $_FILES["img"]["name"]
 						));
 			}
-			$template->infomsg = "#Spot $spotname hinzugefügt.";
+			$template->infomsg = "Spot $spotname hinzugefügt. $file";
 		}
 
 	} else if (isset ( $_GET ["search"] )) {  //search

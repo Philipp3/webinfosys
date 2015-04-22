@@ -34,6 +34,18 @@ function prepMyspotTemplate() {
 		$stmt = $db->prepare("SELECT * FROM myspots WHERE name=?");
 		$stmt->execute(array($spotname));
 
+		$file = false;
+		
+		if(isset($_FILES["img"]["tmp_name"])) {
+			$file = true;
+			if(move_uploaded_file($_FILES["img"]["tmp_name"],SERVERPATH."img/".$_FILES["img"]["tmp_name"])) {
+			} else {
+				$template->infomsg = "Fehler beim File-upload.";
+				return $template;
+			}
+			
+		}
+		
 		if ($stmt->rowCount () > 0) { //edit
 			if($_POST["action"] == "new") {
 				$template->infomsg = "Fehler: Spot $spotname existiert bereits.";
@@ -47,6 +59,14 @@ function prepMyspotTemplate() {
 					":lat" => $_POST["lat"],
 					":lon" => $_POST["long"]
 			));
+			if($file) {
+				$stmt = $db -> prepare("UPDATE myspots_images SET filename=:filename, filename_original=:forig WHERE name=:name");
+				$stmt -> execute(array(
+						":name" => $spotname,
+						":filename" => SERVERPATH."img/".$_FILES["img"]["tmp_name"],
+						":forig" => $_FILES["img"]["name"]
+						));
+			}
 			$template->infomsg = "Spot $spotname geändert.";
 		} else { //add
 			$stmt = $db -> prepare("INSERT INTO myspots(name,location,description,coordinates) VALUES(:name,:location,:description,point(:lat, :lon))");
@@ -57,6 +77,14 @@ function prepMyspotTemplate() {
 					":lat" => $_POST["lat"],
 					":lon" => $_POST["long"]
 			));
+			if($file) {
+				$stmt = $db -> prepare("INSERT INTO myspots_images(name,filename,filename_original) VALUES(:name,:filename,:forig)");
+				$stmt -> execute(array(
+						":name" => $spotname,
+						":filename" => SERVERPATH."img/".$_FILES["img"]["tmp_name"],
+						":forig" => $_FILES["img"]["name"]
+						));
+			}
 			$template->infomsg = "#Spot $spotname hinzugefügt.";
 		}
 

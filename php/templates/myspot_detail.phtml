@@ -6,7 +6,7 @@
 <tr><td>Koordinaten</td><td><?=$lat?>; <?=$lon?></td></tr>
 
 <?php if(isset($images)) { foreach($images as $img){ ?>
-<tr><td colspan="2"><img alt="Bild von <?=$spotname?>" src="/images/<?=$img["filename"]."/".$img["filename_original"]?>"></td></tr>
+<tr><td colspan="2"><img alt="Bild von <?=$spotname?>" src="/images/<?=$img["filename"]?>"></td></tr>
 <?php }} else { ?>
 <tr><td colspan="2">Zu diesem Spot wurde kein Bild gespeichert.</td></tr>
 <?php } ?></td></tr>

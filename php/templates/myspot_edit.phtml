@@ -10,7 +10,7 @@ function submit() {
 <form name="fmain" enctype="multipart/form-data" action="/myspot/" method="post" onsubmit="return submit()">
 <table>
 <tr><td><label for="name">Name</label></td><td>
-<?php if($action=="new") {?><input type="text" name="name" id="name" value="<?php if(isset($editspotname)) echo($editspotname);?>" /><?php }
+<?php if($action=="new") {?><input type="text" name="name" id="name" required value="<?php if(isset($editspotname)) echo($editspotname);?>" /><?php }
 else if ($action=="edit") {?> <?=$editspotname?><input type="hidden" name="name" id="name" value="<?php if(isset($editspotname)) echo($editspotname);?>" />
 <?php }?>
 </td></tr>

@@ -7,7 +7,7 @@ function submit() {
 	return false;
 }
 </script>
-<form action="/myspot/" method="post" onsubmit="submit()">
+<form enctype="multipart/form-data" action="/myspot/" method="post" onsubmit="submit()">
 <table>
 <tr><td><label for="name">Name</label></td><td>
 <?php if($action=="new") {?><input type="text" name="name" id="name" value="<?php if(isset($editspotname)) echo($editspotname);?>" /><?php }

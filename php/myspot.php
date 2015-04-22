@@ -36,7 +36,7 @@ function prepMyspotTemplate() {
 
 		$file = false;
 		
-		vardump($_FILES);
+		var_dump($_FILES);
 		
 		if(true || isset($_FILES["img"])) {
 			$file = true;

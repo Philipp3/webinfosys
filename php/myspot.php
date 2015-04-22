@@ -37,6 +37,8 @@ function prepMyspotTemplate() {
 		$file = false;
 		
 		if(isset($_FILES["img"]["tmp_name"])) {
+			echo("allesgut");
+			die("FDSA");
 			$file = true;
 			if(move_uploaded_file($_FILES["img"]["tmp_name"],SERVERPATH."images/".$_FILES["img"]["tmp_name"])) {
 			} else {
